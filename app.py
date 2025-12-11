@@ -96,6 +96,16 @@ def load_dinero_image():
     except:
         return None
 
+def load_icfes_image():
+    """Carga la imagen del proyecto ICFES"""
+    try:
+        img_path = "image_regresion.jpg"
+        if os.path.exists(img_path):
+            return Image.open(img_path)
+        return None
+    except:
+        return None
+
 # Animación abstracta tecnológica (Red neuronal / Conexiones)
 lottie_hero = load_lottieurl("https://lottie.host/6e676082-9602-4632-902e-132d79c65604/7y3K8C5q4F.json")
 profile_image = load_profile_image()
@@ -105,6 +115,7 @@ tickets_image = load_tickets_image()
 arquitectura_image = load_arquitectura_image()
 mlops_image = load_mlops_image()
 dinero_image = load_dinero_image()
+icfes_image = load_icfes_image()
 
 # ==============================================================================
 # 3. CSS "ELITE ENGINEERING" (VISUALMENTE IMPACTANTE)
@@ -921,6 +932,64 @@ with st.container():
         with col_btn[1]:
             st.link_button("Ver Ingenieria", "LINK_PROYECTO_TICKETS", use_container_width=True)
 
+    st.markdown('</div>', unsafe_allow_html=True)
+
+# --- PROYECTO 4: PREDICCIÓN PUNTAJE ICFES (ML Predictivo) ---
+with st.container():
+    st.markdown('<div class="project-card">', unsafe_allow_html=True)
+    c_txt, c_img = st.columns([1.5, 1], gap="large") # Alternamos con txt-img
+    
+    with c_txt:
+        st.markdown('<div class="status-badge">PROYECTO PERSONAL• NIVEL INTERMEDIO • EDUCATIVO</div>', unsafe_allow_html=True)
+        st.markdown('<h2>Proyecto Predicción Puntaje ICFES</h2>', unsafe_allow_html=True)
+        st.markdown("""
+        <p style="color: #475569; font-size: 1.1rem; line-height: 1.6;">
+            Este proyecto implementa un sistema de <b style="color: #0f172a;">Machine Learning end-to-end</b> diseñado con estándares de nivel empresa, capaz de predecir el puntaje global del examen ICFES a partir de sus cinco componentes individuales. No es solo un modelo: es una plataforma completa de <b style="color: #0f172a;">MLOps</b>, con datos versionados (DVC + S3), experimentación trazable (MLflow), optimización automatizada (Optuna), pipelines reproducibles, un modelo seleccionado rigurosamente mediante validación cruzada, containerización con Docker y despliegue continuo mediante CI/CD en la nube. El resultado es un sistema 100% reproducible, escalable y listo para producción, entregado a través de una <b style="color: #0f172a;">API FastAPI</b> de alto rendimiento.
+        </p>
+        """, unsafe_allow_html=True)
+        
+       
+        st.markdown('<div class="metric-box"><span class="metric-value">Stack tecnológico usado</span><span class="metric-label">Software</span></div>', unsafe_allow_html=True)
+
+            
+        st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown(render_techs(["scikit-learn", "XGBoost", "Optuna", "numpy", "pandas", "MLflow","DVC","AWS S3","FastAPI","Uvicorn","Docker","GitHub Actions","Docker Hub","matplotlib","seaborn","Git"]), unsafe_allow_html=True)
+        
+        st.markdown("<br>", unsafe_allow_html=True)
+        # Botón Premium Central
+        col_btn = st.columns([1, 2, 1])
+        with col_btn[1]:
+            st.link_button("Ver Ingenieria", "LINK_PROYECTO_ICFES", use_container_width=True)
+
+    with c_img:
+        if icfes_image:
+            # Convertir imagen a base64 para insertarla en HTML
+            buffered = BytesIO()
+            # Detectar el formato de la imagen
+            img_format = icfes_image.format if icfes_image.format else "PNG"
+            if img_format == "JPEG":
+                icfes_image.save(buffered, format="JPEG")
+                mime_type = "image/jpeg"
+            else:
+                icfes_image.save(buffered, format="PNG")
+                mime_type = "image/png"
+            img_str = base64.b64encode(buffered.getvalue()).decode()
+            
+            st.markdown(f"""
+            <div style="border-radius: 12px; height: 100%; min-height: 300px; border: 1px solid rgba(0,0,0,0.08); overflow: hidden; background: #ffffff;">
+                <img src="data:{mime_type};base64,{img_str}" alt="ICFES Prediction Project" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            </div>
+            """, unsafe_allow_html=True)
+        else:
+            # Fallback si no hay imagen
+            st.markdown("""
+            <div style="background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); border-radius: 12px; height: 100%; display: flex; align-items: center; justify-content: center; min-height: 300px; border: 1px solid rgba(0,0,0,0.08);">
+                <div style="text-align: center;">
+                    <div style="font-size: 4rem;">📊</div>
+                    <div style="margin-top: 1rem; color: #64748b; font-family: 'JetBrains Mono';">ML Prediction Model</div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
 # ==============================================================================
