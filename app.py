@@ -1,455 +1,318 @@
 import streamlit as st
-from PIL import Image
+from streamlit_lottie import st_lottie
+import requests
 
-# Configuración de la página
+# --- CONFIGURACIÓN DE PÁGINA ---
 st.set_page_config(
-    page_title="Edgar - Portafolio",
-    page_icon="👨‍💻",
-    layout="wide"
+    page_title="Portafolio ML Engineer | [Tu Nombre]",
+    page_icon="⚡",
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
-# CSS personalizado para un diseño impactante
+# --- CARGADOR DE LOTTIE ---
+def load_lottieurl(url):
+    r = requests.get(url)
+    if r.status_code != 200:
+        return None
+    return r.json()
+
+lottie_ai = load_lottieurl("https://assets3.lottiefiles.com/packages/lf20_m9zragkd.json") # Animación Neural Network
+
+# --- CSS PREMIUM (GLASSMORPHISM & GLOW) ---
 st.markdown("""
-<style>
-    /* 1. Fondo principal de la aplicación: BLANCO */
-    .stApp {
-        background-color: #ffffff; /* Blanco puro */
+    <style>
+    /* Importar fuente Inter */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+    html, body, [class*="css"] {
+        font-family: 'Inter', sans-serif;
+        background-color: #FFFFFF;
+        color: #4A5568;
     }
-    
-    /* Eliminar animación de fondo ya que no es necesaria en fondo blanco */
-    @keyframes gradient {
-        /* No se usa */
+
+    /* Fondo oscuro solo en el área principal */
+    div[data-testid="stAppViewContainer"] > div:first-child {
+        background-color: #0E1117;
     }
-    
-    /* 2. Contenedor principal con efecto glassmorphism */
-    /* Mantenemos el efecto Glassmorphism, ajustando la sombra y el borde para blanco */
-    .main .block-container {
-        background: rgba(255, 255, 255, 0.7); /* Ligeramente transparente sobre blanco */
-        backdrop-filter: blur(10px);
-        border-radius: 20px;
-        padding: 2rem;
-        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); /* Sombra más oscura para fondo claro */
-        border: 1px solid rgba(0, 0, 0, 0.1); /* Borde suave */
+
+    main[data-testid="stMain"] {
+        background-color: #0E1117;
     }
-    
-    /* 3. Header con efecto de brillo (AJUSTADO para fondo claro) */
-    .main-header {
-        font-size: 4rem;
-        font-weight: 900;
-        /* Nuevo gradiente de texto para fondo blanco: tonos azules */
-        background: linear-gradient(45deg, #00308F, #007FFF, #00308F); 
-        background-size: 200% auto;
+
+    /* Títulos con gradiente */
+    .gradient-text {
+        background: linear-gradient(90deg, #3B82F6 0%, #60A5FA 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        text-align: center;
-        margin-bottom: 0.5rem;
-        animation: shine 3s linear infinite;
-        text-shadow: 0 0 10px rgba(0,0,0,0.2); /* Sombra oscura sutil */
+        font-weight: 800;
+        font-size: 3.5rem;
+        line-height: 1.1;
     }
-    
-    @keyframes shine {
-        to { background-position: 200% center; }
+
+    .sub-gradient {
+        background: linear-gradient(90deg, #64748B 0%, #3B82F6 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 600;
+        font-size: 1.5rem;
     }
-    
-    .subheader {
-        font-size: 2rem;
-        color: #333333; /* Color oscuro para contraste en fondo blanco */
-        text-align: center;
-        margin-bottom: 2rem;
-        font-weight: 300;
-        text-shadow: none; /* Quitamos la sombra de texto innecesaria */
-    }
-    
-    /* 4. Imagen de perfil circular con efecto hover (se mantiene) */
-    .profile-container {
-        display: flex;
-        justify-content: center;
-        margin: 2rem 0;
-    }
-    
-    .profile-image {
-        width: 200px;
-        height: 200px;
-        border-radius: 50%;
-        border: 5px solid rgba(0,0,0,0.1); /* Borde sutil */
-        box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        object-fit: cover;
-    }
-    
-    .profile-image:hover {
-        transform: scale(1.1) rotate(5deg);
-        box-shadow: 0 15px 60px rgba(0,0,0,0.2);
-    }
-    
-    /* 5. Tarjetas de contacto con efecto glass (AJUSTADO) */
-    .contact-info {
-        background: rgba(255, 255, 255, 0.8); /* Fondo casi blanco */
-        backdrop-filter: blur(10px);
-        padding: 1.5rem;
-        border-radius: 15px;
-        margin: 1rem 0;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-    
-    .contact-info:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-    }
-    
-    .contact-info h4 {
-        color: #007FFF; /* Título de contacto azul brillante */
-        font-size: 1.2rem;
-        margin-bottom: 0.5rem;
-    }
-    
-    .contact-info p, .contact-info a {
-        color: #333333; /* Texto oscuro */
-        text-decoration: none;
-        font-size: 1rem;
-    }
-    
-    .contact-info a:hover {
-        color: #00308F; /* Azul más oscuro al pasar el cursor */
-        text-decoration: underline;
-    }
-    
-    /* 6. Secciones con fondo semi-transparente (AJUSTADO) */
-    .section-container {
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(10px);
-        padding: 2rem;
-        border-radius: 15px;
-        margin: 2rem 0;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-    }
-    
-    /* 7. Headers de sección (AJUSTADO) */
-    h1, h2, h3 {
-        color: #00308F !important; /* Azul oscuro para headers */
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-    }
-    
-    /* 8. Texto general (AJUSTADO) */
-    p, li, div:not(.stApp) {
-        color: #333333 !important; /* Texto oscuro */
-    }
-    
-    /* 9. Tarjetas de proyecto con efecto 3D (AJUSTADO) */
-    .project-card {
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(10px);
-        padding: 2rem;
+
+    /* Efecto Glassmorphism para las tarjetas */
+    div[data-testid="stContainer"] {
+        background: #FFFFFF;
         border-radius: 20px;
-        margin: 1rem 0;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .project-card::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        /* Brillo sutil para fondo claro */
-        background: linear-gradient(45deg, transparent, rgba(0,0,0,0.05), transparent); 
-        transform: rotate(45deg);
-        transition: all 0.5s;
-    }
-    
-    .project-card:hover::before {
-        left: 100%;
-    }
-    
-    .project-card:hover {
-        transform: translateY(-10px) scale(1.02);
-        box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-    }
-    
-    .project-title {
-        font-size: 1.8rem;
-        color: #007FFF; /* Título azul */
-        margin-bottom: 1rem;
-        font-weight: 700;
-    }
-    
-    .project-description {
-        color: #333333; /* Texto oscuro */
-        margin-bottom: 1rem;
-        line-height: 1.6;
-    }
-    
-    .project-tech {
-        background: rgba(0, 127, 255, 0.1); /* Fondo claro de tecnología */
-        padding: 0.8rem;
-        border-radius: 10px;
-        margin: 1rem 0;
-        color: #00308F; /* Texto azul oscuro */
-        font-family: 'Courier New', monospace;
-    }
-    
-    /* 10. Botón (AJUSTADO) */
-    .project-button {
-        display: inline-block;
-        background: linear-gradient(45deg, #007FFF, #00308F); /* Gradiente azul fuerte */
-        color: white;
-        padding: 12px 30px;
-        border-radius: 25px;
-        text-decoration: none;
-        font-weight: bold;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(0, 127, 255, 0.4);
-        margin-top: 1rem;
-    }
-    
-    .project-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 25px rgba(0, 127, 255, 0.6);
-        background: linear-gradient(45deg, #00308F, #007FFF);
-    }
-    
-    /* 11. Divider con gradiente (AJUSTADO) */
-    .divider {
-        border: none;
-        height: 2px;
-        /* Gradiente sutil para fondo claro */
-        background: linear-gradient(90deg, transparent, rgba(0,0,0,0.2), transparent); 
-        margin: 3rem 0;
-    }
-    
-    /* 12. Tablas con estilo mejorado (AJUSTADO) */
-    table {
-        background: rgba(255, 255, 255, 0.8);
-        border-radius: 10px;
-        overflow: hidden;
-    }
-    
-    th {
-        background: rgba(0, 127, 255, 0.3) !important; /* Fondo de encabezado de tabla azul claro */
-        color: #00308F !important; /* Texto oscuro */
-    }
-    
-    td {
-        color: #333333 !important; /* Texto oscuro */
-        border-color: rgba(0, 0, 0, 0.1) !important;
-    }
-    
-    /* 13. Expander personalizado (AJUSTADO) */
-    .streamlit-expanderHeader {
-        background: rgba(255, 255, 255, 0.8);
-        border-radius: 10px;
-        color: #00308F !important; /* Texto azul oscuro */
-    }
-    
-    /* 14. Footer (AJUSTADO) */
-    .footer {
-        text-align: center;
-        color: #333333; /* Texto oscuro */
-        margin-top: 3rem;
+        border: 1px solid #E2E8F0;
         padding: 2rem;
-        background: rgba(255, 255, 255, 0.8);
-        border-radius: 15px;
-        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-</style>
+
+    div[data-testid="stContainer"]:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 24px 0 rgba(59, 130, 246, 0.15);
+        border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    /* Botones personalizados */
+    .stButton>button {
+        background: linear-gradient(92.88deg, #64748B 9.16%, #3B82F6 43.89%, #2563EB 64.72%);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 0.5rem 1rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        width: 100%;
+    }
+    
+    .stButton>button:hover {
+        box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+        transform: scale(1.02);
+        background: linear-gradient(92.88deg, #475569 9.16%, #2563EB 43.89%, #1D4ED8 64.72%);
+    }
+
+    /* Badges de tecnología */
+    .tech-pill {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 14px;
+        margin: 4px;
+        border-radius: 50px;
+        background: #F1F5F9;
+        border: 1px solid #CBD5E1;
+        font-size: 0.8rem;
+        color: #475569;
+        transition: 0.2s;
+    }
+    .tech-pill:hover {
+        background: #E0E7FF;
+        border-color: #3B82F6;
+        color: #2563EB;
+        cursor: default;
+    }
+
+    /* Sidebar Styling */
+    section[data-testid="stSidebar"] {
+        background-color: #FFFFFF;
+        border-right: 1px solid #E2E8F0;
+    }
+    
+    /* Ajustar colores de texto en markdown */
+    .stMarkdown {
+        color: #4A5568;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        color: #1E293B;
+    }
+
+    /* Colores claros para el área principal con fondo oscuro */
+    main[data-testid="stMain"] .stMarkdown,
+    main[data-testid="stMain"] p,
+    main[data-testid="stMain"] div {
+        color: #E2E8F0;
+    }
+
+    main[data-testid="stMain"] h1,
+    main[data-testid="stMain"] h2,
+    main[data-testid="stMain"] h3,
+    main[data-testid="stMain"] h4,
+    main[data-testid="stMain"] h5,
+    main[data-testid="stMain"] h6 {
+        color: #FAFAFA;
+    }
+    
+    </style>
 """, unsafe_allow_html=True)
 
-# Header principal con imagen de perfil
-st.markdown('<div class="main-header">Edgar Yovany Samaca Acuña</div>', unsafe_allow_html=True)
-st.markdown('<div class="subheader">Cientifico de datos</div>', unsafe_allow_html=True)
-
-# Imagen de perfil
-# IMPORTANTE: Reemplaza la URL con la URL de tu imagen de perfil
-# Puedes subirla a imgur.com, postimages.org o usar una URL directa
-st.markdown("""
-<div class="profile-container">
-    <img src="https://via.placeholder.com/200" class="profile-image" alt="Edgar Mirringa">
-</div>
-""", unsafe_allow_html=True)
-
-# Descripción breve
-st.markdown("""
-<div style='text-align: center; font-size: 1.2rem; color: #fff; margin: 2rem 0;'>
-<strong>Profesional apasionado por los datos y la tecnología.</strong><br>
-Especializado en transformar datos en insights accionables y crear soluciones innovadoras.
-</div>
-""", unsafe_allow_html=True)
-
-# Información de contacto en columnas
-col1, col2, col3 = st.columns(3)
-
-with col1:
+# --- SIDEBAR (TU PERFIL PERSISTENTE) ---
+with st.sidebar:
+    # Cargar tu foto de perfil (coloca tu imagen en la carpeta del proyecto)
+    # Puedes usar: "foto_perfil.jpg", "foto_perfil.png", etc.
+    try:
+        st.image("foto_perfil.jpg", width=150, use_container_width=False)
+    except:
+        # Si no encuentra la imagen, no muestra nada
+        pass 
+    st.markdown("## Yovany Samaca Acuña")
+    st.markdown('<p class="sub-gradient">Senior ML Engineer</p>', unsafe_allow_html=True)
+    
+    st.markdown("---")
     st.markdown("""
-    <div class="contact-info">
-        <h4>📧 Contacto</h4>
-        <p>egsamaca56@gmail.com</p>
+    **📍 Ubicación:** Colombia  
+    **📧 Email:** egsamaca56@gmail.com  
+    **📱 Teléfono:** [+57 3016953459]
+    """)
+    
+    st.markdown("---")
+    st.markdown("### ⚡ Stack Rápido")
+    st.markdown("""
+    - 🐍 Python & SQL
+    - 🏗️ AWS / Render / Docker
+    - ⚙️ Airflow & DVC
+    - 🤖 PyTorch & LangChain
+    """)
+    
+    st.markdown("---")
+    st.markdown("""
+    <div style="text-align: center;">
+        <a href="TU_LINKEDIN" target="_blank" style="text-decoration: none; font-size: 24px; margin-right: 15px;">🔗</a>
+        <a href="TU_GITHUB" target="_blank" style="text-decoration: none; font-size: 24px;">🐙</a>
     </div>
     """, unsafe_allow_html=True)
 
-with col2:
+
+# --- MAIN CONTENT ---
+
+# HERO SECTION
+col_text, col_anim = st.columns([1.5, 1], gap="medium")
+
+with col_text:
+    st.markdown('<h1 class="gradient-text">Arquitectura de ML.<br>Escalabilidad.<br>Resultados.</h1>', unsafe_allow_html=True)
     st.markdown("""
-    <div class="contact-info">
-        <h4>🔗 LinkedIn</h4>
-        <p><a href="https://www.linkedin.com/in/edgar-yovany-samaca-acu%C3%B1a-a17452210/" target="_blank">Conectemos</a></p>
+    <div style="font-size: 1.2rem; color: #B0B3B8; margin-top: 20px; line-height: 1.6;">
+    No solo construyo modelos, construyo <b>sistemas resilientes</b>. <br>
+    Ayudo a empresas a transformar experimentos de Data Science en 
+    soluciones de producción <b>automatizadas, monitoreadas y rentables</b>.
     </div>
     """, unsafe_allow_html=True)
+    
+    st.write("") # Spacer
+    c1, c2 = st.columns([1, 1])
+    with c1:
+        st.button("📥 Descargar CV") # Enlaza esto a tu PDF si puedes
+    with c2:
+        st.link_button("✉️ Contactar Ahora", "mailto:tucorreo@email.com")
 
-with col3:
-    st.markdown("""
-    <div class="contact-info">
-        <h4>💻 GitHub</h4>
-        <p><a href="https://github.com/giovany-desing" target="_blank">Mi perfil</a></p>
-    </div>
-    """, unsafe_allow_html=True)
+with col_anim:
+    try:
+        st.image("imagenes/foto.png", use_container_width=True)
+    except:
+        # Si no encuentra la imagen, muestra un mensaje
+        st.info("Imagen no encontrada")
 
-# Divider
-st.markdown('<hr class="divider">', unsafe_allow_html=True)
+st.write("---")
 
-# Sección Sobre Mí
-st.header("👨‍💻 Sobre Mí")
-st.write("""
-Profesional con experiencia en análisis de datos, machine learning y desarrollo de aplicaciones.
-Mi pasión es resolver problemas complejos utilizando tecnología de vanguardia.
+# --- VALUE PROPOSITION (EL FACTOR "WOW") ---
+st.markdown('<h2 style="text-align: center; margin-bottom: 2rem; color: #FAFAFA;">💡 ¿Por qué mi perfil es diferente?</h2>', unsafe_allow_html=True)
 
-**Destacados:**
-- 🎓 Experiencia en análisis de datos y visualización
-- 🤖 Desarrollo de modelos de Machine Learning
-- 📊 Creación de dashboards interactivos
-- 🚀 Siempre explorando nuevas tecnologías
-""")
+vp1, vp2, vp3 = st.columns(3, gap="medium")
 
-st.markdown('<hr class="divider">', unsafe_allow_html=True)
+with vp1:
+    with st.container():
+        st.markdown("### 🔄 MLOps Nativo")
+        st.markdown("El modelo es solo el 20%. El resto es **Infraestructura**. Diseño pipelines CI/CD que detectan Data Drift y reentrenan automáticamente.")
 
-# Sección Habilidades Técnicas
-st.header("🛠️ Habilidades Técnicas")
+with vp2:
+    with st.container():
+        st.markdown("### 🏗️ End-to-End Engineering")
+        st.markdown("Desde la ETL cruda hasta la API en FastAPI de alta concurrencia. **Testing, Logging, Dockerización** y Despliegue en Nube.")
 
-col1, col2, col3, col4 = st.columns(4)
+with vp3:
+    with st.container():
+        st.markdown("### 💰 Impacto de Negocio")
+        st.markdown("Hablo el idioma de los stakeholders. Mis sistemas están diseñados para maximizar el **ROI** y reducir la carga operativa manual.")
 
-with col1:
-    st.subheader("💻 Lenguajes")
-    st.write("""
-    - Python 🐍
+st.write("---")
 
-    - SQL 🗄️
+# --- PROYECTOS (LA JOYA DE LA CORONA) ---
+st.markdown('<h2 class="gradient-text" style="font-size: 2.5rem;">🚀 Proyectos Desplegados</h2>', unsafe_allow_html=True)
+st.markdown("Cada proyecto es una aplicación web en vivo con arquitectura documentada.")
 
-    """)
+# Función auxiliar para Badges
+def tech_badges(tech_list):
+    html = ""
+    for tech in tech_list:
+        html += f'<span class="tech-pill">{tech}</span>'
+    return html
 
-with col2:
-    st.subheader("🚀 Frameworks")
-    st.write("""
-    - Streamlit
-    - Pandas & NumPy
-    - Scikit-learn
-    - TensorFlow
-    - FastAPI
-    """)
+# --- PROYECTO 4 ---
+with st.container():
+    c1, c2 = st.columns([1.5, 1])
+    with c1:
+        st.markdown("### 🤖 Chatbot Analítico 'Agentic' (RAG + SQL)")
+        st.markdown("**El Reto:** Los gerentes necesitaban KPIs instantáneos sin depender del equipo de BI.")
+        st.markdown("**La Solución:** Un agente autónomo construido con **LangGraph** que consulta MySQL en tiempo real, genera gráficas y aprende del feedback del usuario.")
+        st.markdown(tech_badges(["GenAI", "LangChain", "MySQL", "RAG", "Streamlit"]), unsafe_allow_html=True)
+        st.write("")
+        if st.button("Ver Ingeniería ➡️", key="p4"):
+            st.markdown(f'<meta http-equiv="refresh" content="0;url=LINK_PROYECTO_4">', unsafe_allow_html=True)
+            
+    with c2:
+        # Aquí podrías poner un screenshot pequeño si quisieras, o dejar el texto respirar
+        st.info("💡 **Feature Estrella:** Sistema de Feedback Loop que reentrena/afina el prompt basado en la satisfacción del usuario.")
 
-with col3:
-    st.subheader("🔧 Herramientas")
-    st.write("""
-    - Git & GitHub
-    - Docker
-    - Jupyter
-    - Power BI
-    - AWS
-    """)
+st.write("") 
 
-with col4:
-    st.subheader("🔧 Herramientas")
-    st.write("""
-    - Git & GitHub
-    - Docker
-    - Jupyter
-    - Power BI
-    - AWS
-    """)
+# --- PROYECTO 3 ---
+with st.container():
+    c1, c2 = st.columns([1.5, 1])
+    with c1:
+        st.markdown("### 📄 Clasificación de Facturas & OCR (ETL + Airflow)")
+        st.markdown("**El Reto:** 1000+ horas hombre perdidas digitando facturas manualmente.")
+        st.markdown("**La Solución:** Pipeline orquestado en **Airflow**. OCR extrae datos, ML clasifica el segmento y ETL guarda en Drive + SQL. Reentrenamiento 100% automático.")
+        st.markdown(tech_badges(["Apache Airflow", "OCR Tesseract", "DVC", "Docker", "MySQL"]), unsafe_allow_html=True)
+        st.write("")
+        if st.button("Ver Ingeniería ➡️", key="p3"):
+            st.markdown(f'<meta http-equiv="refresh" content="0;url=LINK_PROYECTO_3">', unsafe_allow_html=True)
+            
+    with c2:
+        st.success("⚡ **Arquitectura:** ETL programada cada hora con monitoreo de salud cada 3 días.")
 
+st.write("")
 
+# --- PROYECTO 2 ---
+with st.container():
+    c1, c2 = st.columns([1.5, 1])
+    with c1:
+        st.markdown("### 🎫 Clasificador Inteligente de Tickets IT")
+        st.markdown("**El Reto:** Cuellos de botella en Mesa de Ayuda por triaje manual.")
+        st.markdown("**La Solución:** API en FastAPI con monitoreo de **Data Drift**. Si la distribución de datos cambia, el sistema dispara un workflow de Github Actions para reentrenar.")
+        st.markdown(tech_badges(["FastAPI", "GitHub Actions", "Drift Detection", "Supabase", "Pydantic"]), unsafe_allow_html=True)
+        st.write("")
+        if st.button("Ver Ingeniería ➡️", key="p2"):
+             st.markdown(f'<meta http-equiv="refresh" content="0;url=LINK_PROYECTO_2">', unsafe_allow_html=True)
 
+    with c2:
+        st.warning("🛡️ **Robustez:** Implementación de tests unitarios y validación de esquemas con Pydantic.")
 
+st.write("")
 
-st.markdown('<hr class="divider">', unsafe_allow_html=True)
+# --- PROYECTO 1 ---
+with st.container():
+    st.markdown("### 🎓 Predicción Académica (ICFES)")
+    st.markdown("Despliegue de modelo clásico optimizado para latencia mínima usando **FastAPI** y Render.com. Demo en vivo de buenas prácticas de código.")
+    st.markdown(tech_badges(["Scikit-Learn", "Rest API", "Clean Architecture"]), unsafe_allow_html=True)
+    if st.button("Ver Ingeniería ➡️", key="p1"):
+         st.markdown(f'<meta http-equiv="refresh" content="0;url=LINK_PROYECTO_1">', unsafe_allow_html=True)
 
-# Sección de proyectos destacados
-st.header("🚀 Proyectos Destacados")
+st.write("---")
 
-# Proyecto 1
+# --- FOOTER ---
 st.markdown("""
-<div class="project-card">
-    <div class="project-title">📊 Dashboard Analítico Avanzado</div>
-    <div class="project-description">
-        Plataforma interactiva para visualización y análisis de datos en tiempo real. 
-        Incluye gráficos dinámicos, filtros avanzados y exportación de reportes.
-    </div>
-    <div class="project-tech">
-        <strong>Tecnologías:</strong> Python, Streamlit, Pandas, Plotly, PostgreSQL
-    </div>
-    <a href="https://github.com/tu-usuario/proyecto1" target="_blank" class="project-button">
-        🔗 Ver Proyecto en GitHub
-    </a>
-    <a href="https://tu-app-dashboard.streamlit.app" target="_blank" class="project-button" style="margin-left: 10px;">
-        🌐 Demo en Vivo
-    </a>
-</div>
-""", unsafe_allow_html=True)
-
-# Proyecto 2
-st.markdown("""
-<div class="project-card">
-    <div class="project-title">🤖 Sistema de Predicción con ML</div>
-    <div class="project-description">
-        Modelo de machine learning para predicción de tendencias. Incluye preprocesamiento 
-        de datos, entrenamiento de modelos y API para integración.
-    </div>
-    <div class="project-tech">
-        <strong>Tecnologías:</strong> Python, Scikit-learn, FastAPI, Docker, AWS
-    </div>
-    <a href="https://github.com/tu-usuario/proyecto2" target="_blank" class="project-button">
-        🔗 Ver Proyecto en GitHub
-    </a>
-    <a href="https://tu-ml-app.herokuapp.com" target="_blank" class="project-button" style="margin-left: 10px;">
-        🌐 Demo en Vivo
-    </a>
-</div>
-""", unsafe_allow_html=True)
-
-# Proyecto 3
-st.markdown("""
-<div class="project-card">
-    <div class="project-title">💬 Chatbot Inteligente con NLP</div>
-    <div class="project-description">
-        Asistente virtual con procesamiento de lenguaje natural. Capaz de responder 
-        preguntas, realizar tareas y aprender de las interacciones.
-    </div>
-    <div class="project-tech">
-        <strong>Tecnologías:</strong> Python, OpenAI API, LangChain, Streamlit
-    </div>
-    <a href="https://github.com/tu-usuario/proyecto3" target="_blank" class="project-button">
-        🔗 Ver Proyecto en GitHub
-    </a>
-    <a href="https://tu-chatbot.streamlit.app" target="_blank" class="project-button" style="margin-left: 10px;">
-        🌐 Demo en Vivo
-    </a>
-</div>
-""", unsafe_allow_html=True)
-
-# Footer
-st.markdown('<hr class="divider">', unsafe_allow_html=True)
-st.markdown("""
-<div class="footer">
-    <p style='font-size: 1.2rem;'><strong>© 2024 Edgar Mirringa</strong></p>
-    <p>Hecho con ❤️ y Streamlit</p>
-    <p style='margin-top: 1rem;'>
-        <a href="mailto:egsamaca56@gmail.com" style="color: #00d4ff; text-decoration: none; margin: 0 10px;">📧 Email</a> | 
-        <a href="https://linkedin.com/in/tu-perfil" target="_blank" style="color: #00d4ff; text-decoration: none; margin: 0 10px;">🔗 LinkedIn</a> | 
-        <a href="https://github.com/tu-usuario" target="_blank" style="color: #00d4ff; text-decoration: none; margin: 0 10px;">💻 GitHub</a>
-    </p>
+<div style="text-align: center; padding: 20px;">
+    <h3 class="gradient-text" style="font-size: 2rem;">¿Listo para escalar el equipo de datos?</h3>
+    <p style="color: #B0B3B8;">Estoy disponible para entrevistas y pruebas técnicas.</p>
 </div>
 """, unsafe_allow_html=True)
