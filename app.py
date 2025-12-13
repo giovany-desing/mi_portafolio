@@ -131,6 +131,17 @@ st.markdown("""
         color: #1e293b;
         font-family: 'Inter', sans-serif;
     }
+    
+    /* --- REDUCIR ESPACIADO DE COLUMNAS EN HERO --- */
+    .hero-container [data-testid="column"] {
+        padding: 0.3rem 0.5rem;
+    }
+    
+    /* --- REDUCIR ESPACIADO ESPECÍFICO COLUMNA IMAGEN --- */
+    .profile-image-container [data-testid="column"],
+    div[data-testid="column"]:has(.profile-image-container) {
+        padding: 0.2rem !important;
+    }
 
     /* --- TIPOGRAFÍA DE IMPACTO --- */
     h1, h2, h3 {
@@ -147,24 +158,25 @@ st.markdown("""
 
     /* --- HERO SECTION --- */
     .hero-container {
-        padding: 4rem 0;
+        padding: 0.5rem 0;
         border-bottom: 1px solid rgba(0,0,0,0.08);
         position: relative;
     }
     
     .hero-title {
-        font-size: 5rem;
-        line-height: 1;
-        margin-bottom: 1.5rem;
+        font-size: 4.5rem;
+        line-height: 1.1;
+        margin-bottom: 0.6rem;
         animation: fadeInUp 0.8s ease-out;
     }
     
     .hero-subtitle {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
         color: #475569;
         font-weight: 300;
-        line-height: 1.6;
+        line-height: 1.5;
         max-width: 800px;
+        margin-bottom: 0.3rem;
         animation: fadeInUp 1s ease-out;
     }
     
@@ -174,29 +186,26 @@ st.markdown("""
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 2rem;
-        min-height: 450px;
+        padding: 0;
+        min-height: auto;
     }
     
     .profile-image-wrapper {
         position: relative;
         width: 100%;
-        max-width: 380px;
+        max-width: 261px;
         aspect-ratio: 1;
         border-radius: 50%;
-        padding: 8px;
-        background: linear-gradient(135deg, #2563eb 0%, #1e40af 50%, #1e3a8a 100%);
-        animation: float 6s ease-in-out infinite;
-        box-shadow: 0 25px 70px rgba(37, 99, 235, 0.25),
-                    0 0 120px rgba(30, 64, 175, 0.15),
-                    inset 0 0 30px rgba(37, 99, 235, 0.1);
+        padding: 0;
+        background: transparent;
+        box-shadow: none;
         transition: all 0.4s ease;
+        margin: 0 auto;
     }
     
     .profile-image-wrapper:hover {
         transform: scale(1.05);
-        box-shadow: 0 30px 80px rgba(37, 99, 235, 0.35),
-                    0 0 150px rgba(30, 64, 175, 0.2);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
     
     .profile-image-inner {
@@ -212,16 +221,7 @@ st.markdown("""
     }
     
     .profile-image-inner::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-radius: 50%;
-        padding: 2px;
-        background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(30, 64, 175, 0.2));
-        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-        z-index: 1;
+        display: none;
     }
     
     .profile-image-inner img {
@@ -260,8 +260,8 @@ st.markdown("""
         backdrop-filter: blur(10px);
         border: 1px solid rgba(0, 0, 0, 0.08);
         border-radius: 24px;
-        padding: 3rem;
-        margin-bottom: 4rem;
+        padding: 2.5rem;
+        margin-bottom: 2.5rem;
         position: relative;
         overflow: hidden;
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -332,7 +332,7 @@ st.markdown("""
         text-transform: uppercase;
         letter-spacing: 0.1em;
         color: #2563eb;
-        margin-bottom: 1rem;
+        margin-bottom: 0.6rem;
         display: block;
         font-weight: 600;
     }
@@ -341,7 +341,7 @@ st.markdown("""
     .metric-box {
         border-left: 2px solid #cbd5e1;
         padding-left: 1.5rem;
-        margin-top: 2rem;
+        margin-top: 1.5rem;
     }
     
     .metric-value {
@@ -363,7 +363,7 @@ st.markdown("""
         background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
         color: white !important;
         border: none;
-        padding: 1.1rem 3.5rem;
+        padding: 0.9rem 3.5rem;
         font-weight: 700;
         border-radius: 16px;
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -447,40 +447,60 @@ st.markdown("""
         animation: premiumPulse 3s ease-in-out infinite;
     }
     
-    /* --- BOTONES "VER INGENIERIA" - AZUL OSCURO DINÁMICO --- */
+    /* --- BOTONES "VER INGENIERIA" - AZUL CLARO CON TEXTO BLANCO --- */
     .project-card .stButton > button,
     .project-card button[data-testid="baseButton-secondary"],
-    div[data-testid="stButton"] > button,
+    .project-card div[data-testid="stButton"] > button,
+    .project-card a[data-testid="stLinkButton"],
     .project-card a[data-testid="stLinkButton"] > button,
-    .project-card .stButton button {
-        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%) !important;
-        background-color: #1e40af !important;
-        background-image: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%) !important;
+    .project-card .stButton button,
+    .project-card [data-testid="stLinkButton"] button,
+    .ingenieria-btn-container .stButton > button,
+    .ingenieria-btn-container a[data-testid="stLinkButton"],
+    .ingenieria-btn-container a[data-testid="stLinkButton"] > button,
+    .ingenieria-btn-container [data-testid="stLinkButton"] button,
+    .ingenieria-btn-container div[data-testid="stButton"] > button {
+        background: #3b82f6 !important;
+        background-color: #3b82f6 !important;
+        background-image: none !important;
         color: white !important;
         border: none !important;
         border-color: transparent !important;
-        padding: 1.2rem 3.5rem !important;
-        font-weight: 700 !important;
-        border-radius: 16px !important;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        width: 100% !important;
+        padding: 0.5rem 1.2rem !important;
+        font-weight: 500 !important;
+        border-radius: 6px !important;
+        transition: all 0.3s ease !important;
+        width: auto !important;
+        max-width: 180px !important;
         text-transform: none !important;
-        letter-spacing: 0.04em !important;
-        font-size: 1.15rem !important;
+        letter-spacing: 0.01em !important;
+        font-size: 0.85rem !important;
         position: relative !important;
         overflow: hidden !important;
-        box-shadow: 0 12px 35px rgba(30, 64, 175, 0.4),
-                    0 6px 18px rgba(30, 58, 138, 0.3),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
-        animation: ingenieriaPulse 2.5s ease-in-out infinite !important;
+        box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3) !important;
     }
     
-    /* Forzar color azul oscuro en todos los estados */
+    /* Forzar color azul claro en todos los estados */
     .project-card .stButton > button:focus,
     .project-card .stButton > button:visited,
-    .project-card .stButton > button:link {
-        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%) !important;
-        background-color: #1e40af !important;
+    .project-card .stButton > button:link,
+    .project-card a[data-testid="stLinkButton"]:focus,
+    .project-card a[data-testid="stLinkButton"]:visited,
+    .project-card a[data-testid="stLinkButton"]:link,
+    .project-card [data-testid="stLinkButton"] button:focus,
+    .project-card [data-testid="stLinkButton"] button:visited,
+    .project-card [data-testid="stLinkButton"] button:link,
+    .ingenieria-btn-container .stButton > button:focus,
+    .ingenieria-btn-container .stButton > button:visited,
+    .ingenieria-btn-container .stButton > button:link,
+    .ingenieria-btn-container a[data-testid="stLinkButton"]:focus,
+    .ingenieria-btn-container a[data-testid="stLinkButton"]:visited,
+    .ingenieria-btn-container a[data-testid="stLinkButton"]:link,
+    .ingenieria-btn-container [data-testid="stLinkButton"] button:focus,
+    .ingenieria-btn-container [data-testid="stLinkButton"] button:visited,
+    .ingenieria-btn-container [data-testid="stLinkButton"] button:link {
+        background: #3b82f6 !important;
+        background-color: #3b82f6 !important;
         color: white !important;
     }
     
@@ -494,36 +514,27 @@ st.markdown("""
         height: 100% !important;
         background: linear-gradient(90deg, 
             transparent 0%, 
-            rgba(255, 255, 255, 0.25) 50%, 
+            rgba(255, 255, 255, 0.2) 50%, 
             transparent 100%) !important;
-        transition: left 0.8s ease !important;
+        transition: left 0.5s ease !important;
         z-index: 1 !important;
     }
     
-    .project-card .stButton > button::after,
-    .project-card button[data-testid="baseButton-secondary"]::after {
-        content: "" !important;
-        position: absolute !important;
-        top: 50% !important;
-        left: 50% !important;
-        width: 0 !important;
-        height: 0 !important;
-        border-radius: 50% !important;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%) !important;
-        transform: translate(-50%, -50%) !important;
-        transition: width 0.7s ease, height 0.7s ease !important;
-    }
-    
     .project-card .stButton > button:hover,
-    .project-card button[data-testid="baseButton-secondary"]:hover {
+    .project-card button[data-testid="baseButton-secondary"]:hover,
+    .project-card a[data-testid="stLinkButton"]:hover,
+    .project-card a[data-testid="stLinkButton"]:hover > button,
+    .project-card [data-testid="stLinkButton"] button:hover,
+    .ingenieria-btn-container .stButton > button:hover,
+    .ingenieria-btn-container a[data-testid="stLinkButton"]:hover,
+    .ingenieria-btn-container a[data-testid="stLinkButton"]:hover > button,
+    .ingenieria-btn-container [data-testid="stLinkButton"] button:hover {
         border: none !important;
-        box-shadow: 0 18px 50px rgba(30, 64, 175, 0.6),
-                    0 12px 30px rgba(30, 58, 138, 0.5),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
-        transform: translateY(-6px) scale(1.03) !important;
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4) !important;
+        transform: translateY(-1px) !important;
         color: white !important;
-        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%) !important;
-        background-color: #1e40af !important;
+        background: #2563eb !important;
+        background-color: #2563eb !important;
     }
     
     .project-card .stButton > button:hover::before,
@@ -531,30 +542,19 @@ st.markdown("""
         left: 100% !important;
     }
     
-    .project-card .stButton > button:hover::after,
-    .project-card button[data-testid="baseButton-secondary"]:hover::after {
-        width: 350px !important;
-        height: 350px !important;
-    }
-    
     .project-card .stButton > button:active,
-    .project-card button[data-testid="baseButton-secondary"]:active {
-        transform: translateY(-3px) scale(0.97) !important;
-        box-shadow: 0 10px 25px rgba(30, 64, 175, 0.5),
-                    0 5px 15px rgba(30, 58, 138, 0.4) !important;
-        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%) !important;
-        background-color: #1e40af !important;
-    }
-    
-    @keyframes ingenieriaPulse {
-        0%, 100% {
-            box-shadow: 0 12px 35px rgba(30, 64, 175, 0.4),
-                        0 6px 18px rgba(30, 58, 138, 0.3);
-        }
-        50% {
-            box-shadow: 0 15px 40px rgba(30, 64, 175, 0.5),
-                        0 8px 22px rgba(30, 58, 138, 0.4);
-        }
+    .project-card button[data-testid="baseButton-secondary"]:active,
+    .project-card a[data-testid="stLinkButton"]:active,
+    .project-card a[data-testid="stLinkButton"]:active > button,
+    .project-card [data-testid="stLinkButton"] button:active,
+    .ingenieria-btn-container .stButton > button:active,
+    .ingenieria-btn-container a[data-testid="stLinkButton"]:active,
+    .ingenieria-btn-container a[data-testid="stLinkButton"]:active > button,
+    .ingenieria-btn-container [data-testid="stLinkButton"] button:active {
+        transform: translateY(0px) !important;
+        box-shadow: 0 1px 4px rgba(59, 130, 246, 0.3) !important;
+        background: #3b82f6 !important;
+        background-color: #3b82f6 !important;
     }
     
     /* --- BOTÓN PREMIUM CENTRAL --- */
@@ -571,7 +571,7 @@ st.markdown("""
         text-transform: uppercase;
         letter-spacing: 0.2em;
         color: #64748b;
-        margin: 6rem 0 3rem 0;
+        margin: 3rem 0 2rem 0;
         text-align: center;
         position: relative;
         font-weight: 600;
@@ -648,7 +648,7 @@ st.markdown("""
 # 4. HERO SECTION: "THE PRIZE" - CON FOTO PROFESIONAL
 # ==============================================================================
 # Layout mejorado: Texto a la izquierda, Foto centrada a la derecha
-c1, c2 = st.columns([1.6, 1])
+c1, c2 = st.columns([2.2, 0.8])
 
 with c1:
     st.markdown('<div class="hero-container">', unsafe_allow_html=True)
@@ -658,19 +658,10 @@ with c1:
     <div class="hero-subtitle">
         Construyo sistemas inteligentes que resuelven problemas de negocio reales. 
         Desde arquitecturas <b>Multi-Agente con GenAI</b> hasta pipelines de <b>MLOps</b> que se auto-reparan.
-        <br><br>
+        <br>
         No busco "probar modelos". <b>Entrego soluciones escalables, seguras y rentables.</b>
     </div>
     """, unsafe_allow_html=True)
-    
-    st.markdown("<br>", unsafe_allow_html=True)
-    
-    # Botones de llamada a la acción (CTA)
-    col_cta1, col_cta2, col_void = st.columns([1, 1, 1])
-    with col_cta1:
-        st.link_button("📥 Descargar CV", "TU_LINK_DE_DESCARGA")
-    with col_cta2:
-        st.link_button("🤝 Agendar Reunión", "mailto:tucorreo@ejemplo.com")
     
     st.markdown('</div>', unsafe_allow_html=True)
 
@@ -720,11 +711,11 @@ def value_card(icon, title, desc, image=None):
         icon_html = f'<div style="font-size: 2.5rem;">{icon}</div>'
     
     st.markdown(f"""
-    <div class="value-card" style="padding: 2.5rem; border-radius: 20px; height: 100%;">
-        <div style="margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center; padding: 1rem; background: rgba(37, 99, 235, 0.1); border-radius: 16px; width: fit-content;">
+    <div class="value-card" style="padding: 2rem; border-radius: 20px; height: 100%;">
+        <div style="margin-bottom: 1.2rem; display: flex; align-items: center; justify-content: center; padding: 1rem; background: rgba(37, 99, 235, 0.1); border-radius: 16px; width: fit-content;">
             {icon_html}
         </div>
-        <h3 style="font-size: 1.3rem; margin-bottom: 1rem; font-weight: 700; color: #0f172a;">{title}</h3>
+        <h3 style="font-size: 1.3rem; margin-bottom: 0.8rem; font-weight: 700; color: #0f172a;">{title}</h3>
         <p style="color: #475569; line-height: 1.7; font-size: 0.95rem;">{desc}</p>
     </div>
     """, unsafe_allow_html=True)
@@ -761,17 +752,17 @@ with st.container():
             img_str = base64.b64encode(buffered.getvalue()).decode()
             
             st.markdown(f"""
-            <div style="border-radius: 12px; height: 100%; min-height: 300px; border: 1px solid rgba(0,0,0,0.08); overflow: hidden; background: #ffffff;">
-                <img src="data:image/png;base64,{img_str}" alt="Chatbot Architecture" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <div style="border-radius: 12px; height: 100%; min-height: 210px; border: 1px solid rgba(0,0,0,0.08); overflow: hidden; background: #ffffff; display: flex; align-items: center; justify-content: center;">
+                <img src="data:image/png;base64,{img_str}" alt="Chatbot Architecture" style="width: 70%; height: 70%; object-fit: cover; display: block; border-radius: 8px;">
             </div>
             """, unsafe_allow_html=True)
         else:
             # Fallback si no hay imagen
             st.markdown("""
-            <div style="background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); border-radius: 12px; height: 100%; display: flex; align-items: center; justify-content: center; min-height: 300px; border: 1px solid rgba(0,0,0,0.08);">
+            <div style="background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); border-radius: 12px; height: 100%; display: flex; align-items: center; justify-content: center; min-height: 210px; border: 1px solid rgba(0,0,0,0.08);">
                 <div style="text-align: center;">
-                    <div style="font-size: 4rem;">🤖</div>
-                    <div style="margin-top: 1rem; color: #64748b; font-family: 'JetBrains Mono';">System Architecture</div>
+                    <div style="font-size: 2.8rem;">🤖</div>
+                    <div style="margin-top: 0.7rem; color: #64748b; font-family: 'JetBrains Mono';">System Architecture</div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -801,21 +792,8 @@ with st.container():
         
         st.markdown("<br>", unsafe_allow_html=True)
         
-        # Botón Premium Central
-        st.markdown("""
-        <style>
-        .ingenieria-btn-container {
-            display: flex;
-            justify-content: center;
-            margin: 2rem 0;
-        }
-        </style>
-        <div class="ingenieria-btn-container">
-        """, unsafe_allow_html=True)
-        col_btn = st.columns([1, 2, 1])
-        with col_btn[1]:
-            st.link_button("Ver Ingenieria", "LINK_PROYECTO_CHATBOT", use_container_width=True)
-        st.markdown('</div>', unsafe_allow_html=True)
+        # Botón Ver Ingenieria
+        st.link_button("Ver Ingenieria", "LINK_PROYECTO_CHATBOT", use_container_width=False)
 
     st.markdown('</div>', unsafe_allow_html=True)
 
@@ -847,10 +825,9 @@ with st.container():
         st.markdown(render_techs(["Apache Airflow", "TensorFlow CNN", "Tesseract OCR", "Docker", "AWS S3", "Google Drive API"]), unsafe_allow_html=True)
         
         st.markdown("<br>", unsafe_allow_html=True)
-        # Botón Premium Central
-        col_btn = st.columns([1, 2, 1])
-        with col_btn[1]:
-            st.link_button("Ver Ingenieria", "LINK_PROYECTO_FACTURAS", use_container_width=True)
+        
+        # Botón Ver Ingenieria
+        st.link_button("Ver Ingenieria", "LINK_PROYECTO_FACTURAS", use_container_width=False)
 
     with c_img:
         if invoice_image:
@@ -860,17 +837,17 @@ with st.container():
             img_str = base64.b64encode(buffered.getvalue()).decode()
             
             st.markdown(f"""
-            <div style="border-radius: 12px; height: 100%; min-height: 300px; border: 1px solid rgba(0,0,0,0.08); overflow: hidden; background: #ffffff;">
-                <img src="data:image/jpeg;base64,{img_str}" alt="Invoice Processing System" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <div style="border-radius: 12px; height: 100%; min-height: 210px; border: 1px solid rgba(0,0,0,0.08); overflow: hidden; background: #ffffff; display: flex; align-items: center; justify-content: center;">
+                <img src="data:image/jpeg;base64,{img_str}" alt="Invoice Processing System" style="width: 70%; height: 70%; object-fit: cover; display: block; border-radius: 8px;">
             </div>
             """, unsafe_allow_html=True)
         else:
             # Fallback si no hay imagen
             st.markdown("""
-            <div style="background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); border-radius: 12px; height: 100%; display: flex; align-items: center; justify-content: center; min-height: 300px; border: 1px solid rgba(0,0,0,0.08);">
+            <div style="background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); border-radius: 12px; height: 100%; display: flex; align-items: center; justify-content: center; min-height: 210px; border: 1px solid rgba(0,0,0,0.08);">
                 <div style="text-align: center;">
-                    <div style="font-size: 4rem;">📄</div>
-                    <div style="margin-top: 1rem; color: #64748b; font-family: 'JetBrains Mono';">Automated Pipeline</div>
+                    <div style="font-size: 2.8rem;">📄</div>
+                    <div style="margin-top: 0.7rem; color: #64748b; font-family: 'JetBrains Mono';">Automated Pipeline</div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -889,17 +866,17 @@ with st.container():
             img_str = base64.b64encode(buffered.getvalue()).decode()
             
             st.markdown(f"""
-            <div style="border-radius: 12px; height: 100%; min-height: 300px; border: 1px solid rgba(0,0,0,0.08); overflow: hidden; background: #ffffff;">
-                <img src="data:image/png;base64,{img_str}" alt="Ticket Classification System" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <div style="border-radius: 12px; height: 100%; min-height: 210px; border: 1px solid rgba(0,0,0,0.08); overflow: hidden; background: #ffffff; display: flex; align-items: center; justify-content: center;">
+                <img src="data:image/png;base64,{img_str}" alt="Ticket Classification System" style="width: 70%; height: 70%; object-fit: cover; display: block; border-radius: 8px;">
             </div>
             """, unsafe_allow_html=True)
         else:
             # Fallback si no hay imagen
             st.markdown("""
-            <div style="background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); border-radius: 12px; height: 100%; display: flex; align-items: center; justify-content: center; min-height: 300px; border: 1px solid rgba(0,0,0,0.08);">
+            <div style="background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); border-radius: 12px; height: 100%; display: flex; align-items: center; justify-content: center; min-height: 210px; border: 1px solid rgba(0,0,0,0.08);">
                 <div style="text-align: center;">
-                    <div style="font-size: 4rem;">🎫</div>
-                    <div style="margin-top: 1rem; color: #64748b; font-family: 'JetBrains Mono';">Real-time Classification</div>
+                    <div style="font-size: 2.8rem;">🎫</div>
+                    <div style="margin-top: 0.7rem; color: #64748b; font-family: 'JetBrains Mono';">Real-time Classification</div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -927,10 +904,9 @@ with st.container():
         st.markdown(render_techs(["FastAPI", "DVC", "XGBoost", "Supabase", "GitHub Actions", "Evidently AI"]), unsafe_allow_html=True)
         
         st.markdown("<br>", unsafe_allow_html=True)
-        # Botón Premium Central
-        col_btn = st.columns([1, 2, 1])
-        with col_btn[1]:
-            st.link_button("Ver Ingenieria", "LINK_PROYECTO_TICKETS", use_container_width=True)
+        
+        # Botón Ver Ingenieria
+        st.link_button("Ver Ingenieria", "LINK_PROYECTO_TICKETS", use_container_width=False)
 
     st.markdown('</div>', unsafe_allow_html=True)
 
@@ -956,10 +932,9 @@ with st.container():
         st.markdown(render_techs(["scikit-learn", "XGBoost", "Optuna", "numpy", "pandas", "MLflow","DVC","AWS S3","FastAPI","Uvicorn","Docker","GitHub Actions","Docker Hub","matplotlib","seaborn","Git"]), unsafe_allow_html=True)
         
         st.markdown("<br>", unsafe_allow_html=True)
-        # Botón Premium Central
-        col_btn = st.columns([1, 2, 1])
-        with col_btn[1]:
-            st.link_button("Ver Ingenieria", "LINK_PROYECTO_ICFES", use_container_width=True)
+        
+        # Botón Ver Ingenieria
+        st.link_button("Ver Ingenieria", "LINK_PROYECTO_ICFES", use_container_width=False)
 
     with c_img:
         if icfes_image:
@@ -976,17 +951,17 @@ with st.container():
             img_str = base64.b64encode(buffered.getvalue()).decode()
             
             st.markdown(f"""
-            <div style="border-radius: 12px; height: 100%; min-height: 300px; border: 1px solid rgba(0,0,0,0.08); overflow: hidden; background: #ffffff;">
-                <img src="data:{mime_type};base64,{img_str}" alt="ICFES Prediction Project" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <div style="border-radius: 12px; height: 100%; min-height: 210px; border: 1px solid rgba(0,0,0,0.08); overflow: hidden; background: #ffffff; display: flex; align-items: center; justify-content: center;">
+                <img src="data:{mime_type};base64,{img_str}" alt="ICFES Prediction Project" style="width: 70%; height: 70%; object-fit: cover; display: block; border-radius: 8px;">
             </div>
             """, unsafe_allow_html=True)
         else:
             # Fallback si no hay imagen
             st.markdown("""
-            <div style="background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); border-radius: 12px; height: 100%; display: flex; align-items: center; justify-content: center; min-height: 300px; border: 1px solid rgba(0,0,0,0.08);">
+            <div style="background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); border-radius: 12px; height: 100%; display: flex; align-items: center; justify-content: center; min-height: 210px; border: 1px solid rgba(0,0,0,0.08);">
                 <div style="text-align: center;">
-                    <div style="font-size: 4rem;">📊</div>
-                    <div style="margin-top: 1rem; color: #64748b; font-family: 'JetBrains Mono';">ML Prediction Model</div>
+                    <div style="font-size: 2.8rem;">📊</div>
+                    <div style="margin-top: 0.7rem; color: #64748b; font-family: 'JetBrains Mono';">ML Prediction Model</div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -995,22 +970,19 @@ with st.container():
 # ==============================================================================
 # 7. FOOTER (PERFIL FINAL)
 # ==============================================================================
-st.markdown('<hr style="border: none; border-top: 1px solid rgba(0,0,0,0.1); margin: 4rem 0;">', unsafe_allow_html=True)
+st.markdown('<hr style="border: none; border-top: 1px solid rgba(0,0,0,0.1); margin: 2.5rem 0;">', unsafe_allow_html=True)
 st.markdown("""
-<div style="text-align: center; padding: 4rem 0;">
+<div style="text-align: center; padding: 2.5rem 0;">
     <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: #0f172a;">¿Construimos el futuro?</h2>
-    <p style="color: #475569; font-size: 1.2rem; margin-bottom: 2rem;">
+    <p style="color: #475569; font-size: 1.2rem; margin-bottom: 1.5rem;">
         Disponible para liderar iniciativas de IA que requieran arquitectura sólida y visión de negocio.
     </p>
 </div>
 """, unsafe_allow_html=True)
 
-col_f1, col_f2, col_f3 = st.columns([1, 2, 1])
-with col_f2:
-    st.link_button("✉️ INICIAR CONVERSACIÓN", "mailto:tucorreo@ejemplo.com", use_container_width=True)
 
 st.markdown("""
-<div style="text-align: center; margin-top: 3rem; color: #94a3b8; font-size: 0.8rem;">
+<div style="text-align: center; margin-top: 2rem; color: #94a3b8; font-size: 0.8rem;">
     ENGINEERED BY EDGAR YOVANY | 2024
 </div>
 """, unsafe_allow_html=True)
