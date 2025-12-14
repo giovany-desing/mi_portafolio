@@ -739,21 +739,55 @@ def render_techs(tech_list):
         html += f'<span class="tech-pill">{tech}</span>'
     return html
 
-# --- PROYECTO 3: CHATBOT (La Joya de la Corona) ---
+# --- PROYECTO 1: PREDICCIÓN PUNTAJE ICFES (ML Predictivo) ---
 with st.container():
     st.markdown('<div class="project-card">', unsafe_allow_html=True)
-    c_img, c_txt = st.columns([1, 1.5], gap="large")
+    c_txt, c_img = st.columns([1.5, 1], gap="large") # Alternamos con txt-img
     
+    with c_txt:
+        st.markdown('<div class="status-badge">PROYECTO PERSONAL• NIVEL INTERMEDIO</div>', unsafe_allow_html=True)
+        st.markdown('<h2>Sistema MLOps de Predicción de Puntaje ICFES</h2>', unsafe_allow_html=True)
+        st.markdown("""
+        <p style="color: #475569; font-size: 1.1rem; line-height: 1.6;">
+            <b style="color: #0f172a;">Este no es un modelo en un notebook. Es un sistema de Machine Learning en producción real con arquitectura empresarial.</b>
+            <br><br>
+            Pipeline completamente automatizado de principio a fin: cada actualización del código ejecuta automáticamente el versionado de datos en la nube con DVC + S3, encuentra los mejores parámetros del modelo con Optuna probando 150 configuraciones diferentes, registra todos los experimentos con MLflow, construye la aplicación en un contenedor Docker y la despliega en producción en Render. La API desarrollada en FastAPI carga el modelo al iniciar, valida que los datos de entrada sean correctos y responde predicciones en menos de 100 milisegundos. Trazabilidad completa: cada versión del modelo guarda su identificador único, permitiendo recrear exactamente cualquier versión anterior.
+            <br><br>
+            <b style="color: #0f172a;">La diferencia:</b> Este proyecto resuelve problemas reales que enfrentan empresas en producción: gestión de datos grandes, experimentación organizada (no prueba y error), despliegue automático sin intervención manual, actualizaciones sin interrumpir el servicio y capacidad de auditar qué modelo está activo en cada momento. Diseñado para escalar horizontalmente según demanda.
+            <br><br>
+            <b style="color: #0f172a;">Resultado:</b> Modelo con 98.4% de precisión desplegado en la nube, respondiendo predicciones a través de API REST.
+        </p>
+        """, unsafe_allow_html=True)
+        
+       
+        st.markdown('<div class="metric-box"><span class="metric-value">Stack tecnológico usado</span><span class="metric-label">Software</span></div>', unsafe_allow_html=True)
+
+            
+        st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown(render_techs(["scikit-learn", "XGBoost", "Optuna", "numpy", "pandas", "MLflow","DVC","AWS S3","FastAPI","Uvicorn","Docker","GitHub Actions","Docker Hub","Git"]), unsafe_allow_html=True)
+        
+        st.markdown("<br>", unsafe_allow_html=True)
+        
+        # Botón Ver Ingenieria
+        st.link_button("Ver Ingenieria", "https://icfesapp-f3esput3wngkx3vq2krfph.streamlit.app/", use_container_width=False)
+
     with c_img:
-        if chatbot_image:
+        if icfes_image:
             # Convertir imagen a base64 para insertarla en HTML
             buffered = BytesIO()
-            chatbot_image.save(buffered, format="PNG")
+            # Detectar el formato de la imagen
+            img_format = icfes_image.format if icfes_image.format else "PNG"
+            if img_format == "JPEG":
+                icfes_image.save(buffered, format="JPEG")
+                mime_type = "image/jpeg"
+            else:
+                icfes_image.save(buffered, format="PNG")
+                mime_type = "image/png"
             img_str = base64.b64encode(buffered.getvalue()).decode()
             
             st.markdown(f"""
             <div style="border-radius: 12px; height: 100%; min-height: 210px; border: 1px solid rgba(0,0,0,0.08); overflow: hidden; background: #ffffff; display: flex; align-items: center; justify-content: center;">
-                <img src="data:image/png;base64,{img_str}" alt="Chatbot Architecture" style="width: 70%; height: 70%; object-fit: cover; display: block; border-radius: 8px;">
+                <img src="data:{mime_type};base64,{img_str}" alt="ICFES Prediction Project" style="width: 70%; height: 70%; object-fit: cover; display: block; border-radius: 8px;">
             </div>
             """, unsafe_allow_html=True)
         else:
@@ -761,99 +795,14 @@ with st.container():
             st.markdown("""
             <div style="background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); border-radius: 12px; height: 100%; display: flex; align-items: center; justify-content: center; min-height: 210px; border: 1px solid rgba(0,0,0,0.08);">
                 <div style="text-align: center;">
-                    <div style="font-size: 2.8rem;">🤖</div>
-                    <div style="margin-top: 0.7rem; color: #64748b; font-family: 'JetBrains Mono';">System Architecture</div>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-    
-    with c_txt:
-        st.markdown('<div class="status-badge">GEN AI • CLOUD • MULTI-AGENT</div>', unsafe_allow_html=True)
-        st.markdown('<h2>Chatbot Analítico Empresarial con RAG & SQL</h2>', unsafe_allow_html=True)
-        st.markdown("""
-        <p style="color: #475569; font-size: 1.1rem; line-height: 1.6;">
-            Solución al problema de <b style="color: #0f172a;">"Datos Atrapados"</b>. Transformé bases de datos SQL complejas en una conversación natural. 
-            Utilizando una arquitectura de <b style="color: #0f172a;">3 capas de inteligencia</b> (Reglas → Modelo Fine-Tuned → LLM General), 
-            este sistema democratiza el acceso a la información sin depender de analistas.
-        </p>
-        """, unsafe_allow_html=True)
-        
-        # Métricas de impacto
-        m1, m2, m3 = st.columns(3)
-        with m1:
-            st.markdown('<div class="metric-box"><span class="metric-value">< 2s</span><span class="metric-label">Latencia</span></div>', unsafe_allow_html=True)
-        with m2:
-            st.markdown('<div class="metric-box"><span class="metric-value">99.9%</span><span class="metric-label">IaC Terraform</span></div>', unsafe_allow_html=True)
-        with m3:
-            st.markdown('<div class="metric-box"><span class="metric-value">100%</span><span class="metric-label">Auto-Scalable</span></div>', unsafe_allow_html=True)
-        
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown(render_techs(["LangGraph", "Llama 3.1 Fine-tuned", "AWS RDS/EC2", "Terraform", "PostgreSQL Vector", "Redis"]), unsafe_allow_html=True)
-        
-        st.markdown("<br>", unsafe_allow_html=True)
-        
-        # Botón Ver Ingenieria
-        st.link_button("Ver Ingenieria", "LINK_PROYECTO_CHATBOT", use_container_width=False)
-
-    st.markdown('</div>', unsafe_allow_html=True)
-
-# --- PROYECTO 2: FACTURAS (Automatización Pura) ---
-with st.container():
-    st.markdown('<div class="project-card">', unsafe_allow_html=True)
-    c_txt, c_img = st.columns([1.5, 1], gap="large") # Invertimos orden para dinamismo
-    
-    with c_txt:
-        st.markdown('<div class="status-badge">COMPUTER VISION • ETL • AUTOMATION</div>', unsafe_allow_html=True)
-        st.markdown('<h2>Sistema de Procesamiento Inteligente de Facturas PDF</h2>', unsafe_allow_html=True)
-        st.markdown("""
-        <p style="color: #475569; font-size: 1.1rem; line-height: 1.6;">
-            Eliminación total de la intervención humana en cuentas por pagar. 
-            Diseñé un pipeline que ingesta PDFs, clasifica con <b style="color: #0f172a;">CNN (Deep Learning)</b> y extrae datos estructurados con <b style="color: #0f172a;">OCR</b>. 
-            Lo que tomaba 16 horas al mes, ahora toma segundos.
-        </p>
-        """, unsafe_allow_html=True)
-        
-        m1, m2, m3 = st.columns(3)
-        with m1:
-            st.markdown('<div class="metric-box"><span class="metric-value">0%</span><span class="metric-label">Human Loop</span></div>', unsafe_allow_html=True)
-        with m2:
-            st.markdown('<div class="metric-box"><span class="metric-value">95%</span><span class="metric-label">Accuracy CNN</span></div>', unsafe_allow_html=True)
-        with m3:
-            st.markdown('<div class="metric-box"><span class="metric-value">Hourly</span><span class="metric-label">ETL Schedule</span></div>', unsafe_allow_html=True)
-            
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown(render_techs(["Apache Airflow", "TensorFlow CNN", "Tesseract OCR", "Docker", "AWS S3", "Google Drive API"]), unsafe_allow_html=True)
-        
-        st.markdown("<br>", unsafe_allow_html=True)
-        
-        # Botón Ver Ingenieria
-        st.link_button("Ver Ingenieria", "LINK_PROYECTO_FACTURAS", use_container_width=False)
-
-    with c_img:
-        if invoice_image:
-            # Convertir imagen a base64 para insertarla en HTML
-            buffered = BytesIO()
-            invoice_image.save(buffered, format="JPEG")
-            img_str = base64.b64encode(buffered.getvalue()).decode()
-            
-            st.markdown(f"""
-            <div style="border-radius: 12px; height: 100%; min-height: 210px; border: 1px solid rgba(0,0,0,0.08); overflow: hidden; background: #ffffff; display: flex; align-items: center; justify-content: center;">
-                <img src="data:image/jpeg;base64,{img_str}" alt="Invoice Processing System" style="width: 70%; height: 70%; object-fit: cover; display: block; border-radius: 8px;">
-            </div>
-            """, unsafe_allow_html=True)
-        else:
-            # Fallback si no hay imagen
-            st.markdown("""
-            <div style="background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); border-radius: 12px; height: 100%; display: flex; align-items: center; justify-content: center; min-height: 210px; border: 1px solid rgba(0,0,0,0.08);">
-                <div style="text-align: center;">
-                    <div style="font-size: 2.8rem;">📄</div>
-                    <div style="margin-top: 0.7rem; color: #64748b; font-family: 'JetBrains Mono';">Automated Pipeline</div>
+                    <div style="font-size: 2.8rem;">📊</div>
+                    <div style="margin-top: 0.7rem; color: #64748b; font-family: 'JetBrains Mono';">ML Prediction Model</div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
-# --- PROYECTO 1: TICKETS (MLOps Puro) ---
+# --- PROYECTO 2: TICKETS (MLOps Puro) ---
 with st.container():
     st.markdown('<div class="project-card">', unsafe_allow_html=True)
     c_img, c_txt = st.columns([1, 1.5], gap="large")
@@ -910,49 +859,48 @@ with st.container():
 
     st.markdown('</div>', unsafe_allow_html=True)
 
-# --- PROYECTO 4: PREDICCIÓN PUNTAJE ICFES (ML Predictivo) ---
+# --- PROYECTO 3: FACTURAS (Automatización Pura) ---
 with st.container():
     st.markdown('<div class="project-card">', unsafe_allow_html=True)
-    c_txt, c_img = st.columns([1.5, 1], gap="large") # Alternamos con txt-img
+    c_txt, c_img = st.columns([1.5, 1], gap="large") # Invertimos orden para dinamismo
     
     with c_txt:
-        st.markdown('<div class="status-badge">PROYECTO PERSONAL• NIVEL INTERMEDIO • EDUCATIVO</div>', unsafe_allow_html=True)
-        st.markdown('<h2>Proyecto Predicción Puntaje ICFES</h2>', unsafe_allow_html=True)
+        st.markdown('<div class="status-badge">COMPUTER VISION • ETL • AUTOMATION</div>', unsafe_allow_html=True)
+        st.markdown('<h2>Sistema de Procesamiento Inteligente de Facturas PDF</h2>', unsafe_allow_html=True)
         st.markdown("""
         <p style="color: #475569; font-size: 1.1rem; line-height: 1.6;">
-            Este proyecto implementa un sistema de <b style="color: #0f172a;">Machine Learning end-to-end</b> diseñado con estándares de nivel empresa, capaz de predecir el puntaje global del examen ICFES a partir de sus cinco componentes individuales. No es solo un modelo: es una plataforma completa de <b style="color: #0f172a;">MLOps</b>, con datos versionados (DVC + S3), experimentación trazable (MLflow), optimización automatizada (Optuna), pipelines reproducibles, un modelo seleccionado rigurosamente mediante validación cruzada, containerización con Docker y despliegue continuo mediante CI/CD en la nube. El resultado es un sistema 100% reproducible, escalable y listo para producción, entregado a través de una <b style="color: #0f172a;">API FastAPI</b> de alto rendimiento.
+            Eliminación total de la intervención humana en cuentas por pagar. 
+            Diseñé un pipeline que ingesta PDFs, clasifica con <b style="color: #0f172a;">CNN (Deep Learning)</b> y extrae datos estructurados con <b style="color: #0f172a;">OCR</b>. 
+            Lo que tomaba 16 horas al mes, ahora toma segundos.
         </p>
         """, unsafe_allow_html=True)
         
-       
-        st.markdown('<div class="metric-box"><span class="metric-value">Stack tecnológico usado</span><span class="metric-label">Software</span></div>', unsafe_allow_html=True)
-
+        m1, m2, m3 = st.columns(3)
+        with m1:
+            st.markdown('<div class="metric-box"><span class="metric-value">0%</span><span class="metric-label">Human Loop</span></div>', unsafe_allow_html=True)
+        with m2:
+            st.markdown('<div class="metric-box"><span class="metric-value">95%</span><span class="metric-label">Accuracy CNN</span></div>', unsafe_allow_html=True)
+        with m3:
+            st.markdown('<div class="metric-box"><span class="metric-value">Hourly</span><span class="metric-label">ETL Schedule</span></div>', unsafe_allow_html=True)
             
         st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown(render_techs(["scikit-learn", "XGBoost", "Optuna", "numpy", "pandas", "MLflow","DVC","AWS S3","FastAPI","Uvicorn","Docker","GitHub Actions","Docker Hub","matplotlib","seaborn","Git"]), unsafe_allow_html=True)
+        st.markdown(render_techs(["Apache Airflow", "TensorFlow CNN", "Tesseract OCR", "Docker", "AWS S3", "Google Drive API"]), unsafe_allow_html=True)
         
         st.markdown("<br>", unsafe_allow_html=True)
         
         # Botón Ver Ingenieria
-        st.link_button("Ver Ingenieria", "LINK_PROYECTO_ICFES", use_container_width=False)
+        st.link_button("Ver Ingenieria", "LINK_PROYECTO_FACTURAS", use_container_width=False)
 
     with c_img:
-        if icfes_image:
+        if invoice_image:
             # Convertir imagen a base64 para insertarla en HTML
             buffered = BytesIO()
-            # Detectar el formato de la imagen
-            img_format = icfes_image.format if icfes_image.format else "PNG"
-            if img_format == "JPEG":
-                icfes_image.save(buffered, format="JPEG")
-                mime_type = "image/jpeg"
-            else:
-                icfes_image.save(buffered, format="PNG")
-                mime_type = "image/png"
+            invoice_image.save(buffered, format="JPEG")
             img_str = base64.b64encode(buffered.getvalue()).decode()
             
             st.markdown(f"""
             <div style="border-radius: 12px; height: 100%; min-height: 210px; border: 1px solid rgba(0,0,0,0.08); overflow: hidden; background: #ffffff; display: flex; align-items: center; justify-content: center;">
-                <img src="data:{mime_type};base64,{img_str}" alt="ICFES Prediction Project" style="width: 70%; height: 70%; object-fit: cover; display: block; border-radius: 8px;">
+                <img src="data:image/jpeg;base64,{img_str}" alt="Invoice Processing System" style="width: 70%; height: 70%; object-fit: cover; display: block; border-radius: 8px;">
             </div>
             """, unsafe_allow_html=True)
         else:
@@ -960,11 +908,69 @@ with st.container():
             st.markdown("""
             <div style="background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); border-radius: 12px; height: 100%; display: flex; align-items: center; justify-content: center; min-height: 210px; border: 1px solid rgba(0,0,0,0.08);">
                 <div style="text-align: center;">
-                    <div style="font-size: 2.8rem;">📊</div>
-                    <div style="margin-top: 0.7rem; color: #64748b; font-family: 'JetBrains Mono';">ML Prediction Model</div>
+                    <div style="font-size: 2.8rem;">📄</div>
+                    <div style="margin-top: 0.7rem; color: #64748b; font-family: 'JetBrains Mono';">Automated Pipeline</div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
+
+# --- PROYECTO 4: CHATBOT (La Joya de la Corona) ---
+with st.container():
+    st.markdown('<div class="project-card">', unsafe_allow_html=True)
+    c_img, c_txt = st.columns([1, 1.5], gap="large")
+    
+    with c_img:
+        if chatbot_image:
+            # Convertir imagen a base64 para insertarla en HTML
+            buffered = BytesIO()
+            chatbot_image.save(buffered, format="PNG")
+            img_str = base64.b64encode(buffered.getvalue()).decode()
+            
+            st.markdown(f"""
+            <div style="border-radius: 12px; height: 100%; min-height: 210px; border: 1px solid rgba(0,0,0,0.08); overflow: hidden; background: #ffffff; display: flex; align-items: center; justify-content: center;">
+                <img src="data:image/png;base64,{img_str}" alt="Chatbot Architecture" style="width: 70%; height: 70%; object-fit: cover; display: block; border-radius: 8px;">
+            </div>
+            """, unsafe_allow_html=True)
+        else:
+            # Fallback si no hay imagen
+            st.markdown("""
+            <div style="background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); border-radius: 12px; height: 100%; display: flex; align-items: center; justify-content: center; min-height: 210px; border: 1px solid rgba(0,0,0,0.08);">
+                <div style="text-align: center;">
+                    <div style="font-size: 2.8rem;">🤖</div>
+                    <div style="margin-top: 0.7rem; color: #64748b; font-family: 'JetBrains Mono';">System Architecture</div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+    
+    with c_txt:
+        st.markdown('<div class="status-badge">GEN AI • CLOUD • MULTI-AGENT</div>', unsafe_allow_html=True)
+        st.markdown('<h2>Chatbot Analítico Empresarial con RAG & SQL</h2>', unsafe_allow_html=True)
+        st.markdown("""
+        <p style="color: #475569; font-size: 1.1rem; line-height: 1.6;">
+            Solución al problema de <b style="color: #0f172a;">"Datos Atrapados"</b>. Transformé bases de datos SQL complejas en una conversación natural. 
+            Utilizando una arquitectura de <b style="color: #0f172a;">3 capas de inteligencia</b> (Reglas → Modelo Fine-Tuned → LLM General), 
+            este sistema democratiza el acceso a la información sin depender de analistas.
+        </p>
+        """, unsafe_allow_html=True)
+        
+        # Métricas de impacto
+        m1, m2, m3 = st.columns(3)
+        with m1:
+            st.markdown('<div class="metric-box"><span class="metric-value">< 2s</span><span class="metric-label">Latencia</span></div>', unsafe_allow_html=True)
+        with m2:
+            st.markdown('<div class="metric-box"><span class="metric-value">99.9%</span><span class="metric-label">IaC Terraform</span></div>', unsafe_allow_html=True)
+        with m3:
+            st.markdown('<div class="metric-box"><span class="metric-value">100%</span><span class="metric-label">Auto-Scalable</span></div>', unsafe_allow_html=True)
+        
+        st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown(render_techs(["LangGraph", "Llama 3.1 Fine-tuned", "AWS RDS/EC2", "Terraform", "PostgreSQL Vector", "Redis"]), unsafe_allow_html=True)
+        
+        st.markdown("<br>", unsafe_allow_html=True)
+        
+        # Botón Ver Ingenieria
+        st.link_button("Ver Ingenieria", "LINK_PROYECTO_CHATBOT", use_container_width=False)
+
     st.markdown('</div>', unsafe_allow_html=True)
 
 # ==============================================================================
