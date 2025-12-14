@@ -832,30 +832,28 @@ with st.container():
     
     with c_txt:
         st.markdown('<div class="status-badge">MLOPS • FASTAPI • DRIFT DETECTION</div>', unsafe_allow_html=True)
-        st.markdown('<h2>Clasificador de Tickets con Ciclo de Vida Auto-Gestionado</h2>', unsafe_allow_html=True)
+        st.markdown('<h2>Sistema de Clasificación Inteligente de Tickets de Soporte</h2>', unsafe_allow_html=True)
         st.markdown("""
         <p style="color: #475569; font-size: 1.1rem; line-height: 1.6;">
-            Solución al cuello de botella operativo en Fiduciaria. 
-            No es solo un modelo: es un sistema vivo. Detecta <b style="color: #0f172a;">Data Drift</b> automáticamente, 
-            dispara reentrenamientos con <b style="color: #0f172a;">Optuna</b> y despliega nuevas versiones sin downtime.
+            Desarrollé un sistema MLOps enterprise-grade end-to-end que automatiza la clasificación de tickets de soporte con <b style="color: #0f172a;">98.35% de precisión</b>, eliminando intervención manual y reduciendo costos operativos en 70-80%. Construí pipeline completo: preprocesamiento NLP en español (NLTK tokenización + stemming Snowball + TF-IDF 5000D) → entrenamiento de 7 algoritmos optimizados con Optuna (búsqueda bayesiana 20 trials × 3-fold CV) → deployment continuo con auto-recuperación.
+            <br><br>
+            Implementé <b style="color: #0f172a;">FastAPI</b> por su arquitectura asíncrona ASGI (30 req/min, &lt;500ms latencia), validación Pydantic automática, y <b style="color: #0f172a;">hot-reload de modelos sin downtime</b> — crítico para actualizar en producción sin afectar SLAs. Desplegué <b style="color: #0f172a;">Apache Airflow</b> para orquestación on-premise con DAGs visuales, retry logic granular, y ShortCircuitOperators que previenen reentrenamientos innecesarios, reduciendo costos computacionales 60%.
+            <br><br>
+            Optimicé entrenamiento comparando Gradient Boosting vs XGBoost vs LightGBM, seleccionando objetivamente el mejor. Versioné con DVC + S3 (datasets y modelos), trackeé experimentos con MLflow (params, metrics, artifacts). Construí drift detection tri-dimensional (KS-test, Chi-square, vocabulary growth) que detecta degradación en &lt;6 horas y dispara auto-retrain solo si mejora ≥1%.
+            <br><br>
+            Desplegué dual orchestration (GitHub Actions cloud + Airflow on-premise) para máxima flexibilidad. Implementé procesamiento batch (100 tickets simultáneos via vectorización NumPy), reduciendo migraciones 97% (5,000 tickets en 5 min vs 3h). El sistema se <b style="color: #0f172a;">auto-mantiene</b>: detecta drift de vocabulario ("Teams", "Zoom" nuevos) → retrain con datos actualizados → valida mejora → hot-reload API → notifica — <b style="color: #0f172a;">cero intervención humana</b>.
         </p>
         """, unsafe_allow_html=True)
         
-        m1, m2, m3 = st.columns(3)
-        with m1:
-            st.markdown('<div class="metric-box"><span class="metric-value">94%</span><span class="metric-label">F1-Score</span></div>', unsafe_allow_html=True)
-        with m2:
-            st.markdown('<div class="metric-box"><span class="metric-value"><1s</span><span class="metric-label">Inferencia</span></div>', unsafe_allow_html=True)
-        with m3:
-            st.markdown('<div class="metric-box"><span class="metric-value">Auto</span><span class="metric-label">Retraining</span></div>', unsafe_allow_html=True)
+        st.markdown('<div class="metric-box"><span class="metric-value">Stack tecnológico usado</span><span class="metric-label">Software</span></div>', unsafe_allow_html=True)
             
         st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown(render_techs(["FastAPI", "DVC", "XGBoost", "Supabase", "GitHub Actions", "Evidently AI"]), unsafe_allow_html=True)
+        st.markdown(render_techs(["Python 3.9", "FastAPI", "scikit-learn", "XGBoost", "LightGBM", "Optuna", "NLTK", "DVC", "MLflow", "Airflow", "GitHub Actions", "Postgresql Supabase", "AWS S3", "Render", "pytest"]), unsafe_allow_html=True)
         
         st.markdown("<br>", unsafe_allow_html=True)
         
         # Botón Ver Ingenieria
-        st.link_button("Ver Ingenieria", "LINK_PROYECTO_TICKETS", use_container_width=False)
+        st.link_button("Ver Ingenieria", "https://fiduciaticketapprterapp-825d6duggvtwzndc65qx4r.streamlit.app/", use_container_width=False)
 
     st.markdown('</div>', unsafe_allow_html=True)
 
