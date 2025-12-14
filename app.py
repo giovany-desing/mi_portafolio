@@ -99,7 +99,7 @@ def load_dinero_image():
 def load_icfes_image():
     """Carga la imagen del proyecto ICFES"""
     try:
-        img_path = "image_regresion.jpg"
+        img_path = "image_regresion.png"
         if os.path.exists(img_path):
             return Image.open(img_path)
         return None
@@ -787,7 +787,7 @@ with st.container():
             
             st.markdown(f"""
             <div style="border-radius: 12px; height: 100%; min-height: 210px; border: 1px solid rgba(0,0,0,0.08); overflow: hidden; background: #ffffff; display: flex; align-items: center; justify-content: center;">
-                <img src="data:{mime_type};base64,{img_str}" alt="ICFES Prediction Project" style="width: 70%; height: 70%; object-fit: cover; display: block; border-radius: 8px;">
+                <img src="data:{mime_type};base64,{img_str}" alt="ICFES Prediction Project" style="width: 121%; height: 121%; object-fit: cover; display: block; border-radius: 8px;">
             </div>
             """, unsafe_allow_html=True)
         else:
@@ -816,7 +816,7 @@ with st.container():
             
             st.markdown(f"""
             <div style="border-radius: 12px; height: 100%; min-height: 210px; border: 1px solid rgba(0,0,0,0.08); overflow: hidden; background: #ffffff; display: flex; align-items: center; justify-content: center;">
-                <img src="data:image/png;base64,{img_str}" alt="Ticket Classification System" style="width: 70%; height: 70%; object-fit: cover; display: block; border-radius: 8px;">
+                <img src="data:image/png;base64,{img_str}" alt="Ticket Classification System" style="width: 105%; height: 105%; object-fit: cover; display: block; border-radius: 8px;">
             </div>
             """, unsafe_allow_html=True)
         else:
@@ -898,7 +898,7 @@ with st.container():
             
             st.markdown(f"""
             <div style="border-radius: 12px; height: 100%; min-height: 210px; border: 1px solid rgba(0,0,0,0.08); overflow: hidden; background: #ffffff; display: flex; align-items: center; justify-content: center;">
-                <img src="data:image/jpeg;base64,{img_str}" alt="Invoice Processing System" style="width: 70%; height: 70%; object-fit: cover; display: block; border-radius: 8px;">
+                <img src="data:image/jpeg;base64,{img_str}" alt="Invoice Processing System" style="width: 105%; height: 105%; object-fit: cover; display: block; border-radius: 8px;">
             </div>
             """, unsafe_allow_html=True)
         else:
