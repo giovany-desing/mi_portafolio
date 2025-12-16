@@ -745,7 +745,7 @@ with st.container():
     c_txt, c_img = st.columns([1.5, 1], gap="large") # Alternamos con txt-img
     
     with c_txt:
-        st.markdown('<div class="status-badge">PROYECTO PERSONAL• NIVEL INTERMEDIO</div>', unsafe_allow_html=True)
+        st.markdown('<div class="status-badge">PROYECTO PERSONAL ‖ NIVEL BASICO</div>', unsafe_allow_html=True)
         st.markdown('<h2>Sistema MLOps de Predicción de Puntaje ICFES</h2>', unsafe_allow_html=True)
         st.markdown("""
         <p style="color: #475569; font-size: 1.1rem; line-height: 1.6;">
@@ -831,7 +831,7 @@ with st.container():
             """, unsafe_allow_html=True)
     
     with c_txt:
-        st.markdown('<div class="status-badge">MLOPS • FASTAPI • DRIFT DETECTION</div>', unsafe_allow_html=True)
+        st.markdown('<div class="status-badge">PROYECTO EMPRESARIAL PARA USO INTERNO ‖ NIVEL INTERMEDIO</div>', unsafe_allow_html=True)
         st.markdown('<h2>Sistema de Clasificación Inteligente de Tickets de Soporte</h2>', unsafe_allow_html=True)
         st.markdown("""
         <p style="color: #475569; font-size: 1.1rem; line-height: 1.6;">
@@ -863,26 +863,48 @@ with st.container():
     c_txt, c_img = st.columns([1.5, 1], gap="large") # Invertimos orden para dinamismo
     
     with c_txt:
-        st.markdown('<div class="status-badge">COMPUTER VISION • ETL • AUTOMATION</div>', unsafe_allow_html=True)
-        st.markdown('<h2>Sistema de Procesamiento Inteligente de Facturas PDF</h2>', unsafe_allow_html=True)
+        st.markdown('<div class="status-badge">PROYECTO PARA USO EMPRESARIAL ‖ NIVEL AVANZADO</div>', unsafe_allow_html=True)
+        st.markdown('<h2>Sistema ETL de Facturas con Machine Learning</h2>', unsafe_allow_html=True)
         st.markdown("""
         <p style="color: #475569; font-size: 1.1rem; line-height: 1.6;">
-            Eliminación total de la intervención humana en cuentas por pagar. 
-            Diseñé un pipeline que ingesta PDFs, clasifica con <b style="color: #0f172a;">CNN (Deep Learning)</b> y extrae datos estructurados con <b style="color: #0f172a;">OCR</b>. 
-            Lo que tomaba 16 horas al mes, ahora toma segundos.
+            Diseñé y construí un sistema inteligente que automatiza el procesamiento de facturas textiles usando inteligencia artificial, reduciendo tiempo de clasificación manual de horas a segundos.
+            <br><br>
+            El sistema analiza cada factura, la clasifica automáticamente de acuerdo a reglas de negocio establecidas por el cliente, extrae información clave y la organiza en bases de datos para análisis de negocio. Todo desplegado en la nube con AWS usando arquitectura serverless, escalando automáticamente según la demanda.
+            <br><br>
+            <b style="color: #0f172a;">Impacto:</b>
+            <br>
+            - ⚡ <b>Velocidad:</b> De horas de clasificación manual a procesamiento en segundos
+            <br>
+            - 🎯 <b>Precisión:</b> >90% accuracy vs errores humanos variables
+            <br>
+            - 📈 <b>Escalabilidad:</b> Maneja picos de demanda automáticamente
+            <br>
+            - 💰 <b>Costo:</b> Solo pagas por lo que usas (modelo serverless)
+            <br>
+            - 🔄 <b>Mejora Continua:</b> El modelo se reentrena automáticamente cuando detecta cambios en los patrones de datos
+            <br><br>
+            <b style="color: #0f172a;">Valor Técnico</b>
+            <br><br>
+            Este proyecto refleja mi capacidad para:
+            <br><br>
+            1. Diseñar soluciones escalables considerando trade-offs (costo, complejidad, mantenibilidad)
+            <br>
+            2. Implementar ML en producción no solo entrenar modelos, sino todo el lifecycle
+            <br>
+            3. Usar Infrastructure as Code para sistemas reproducibles y mantenibles
+            <br>
+            4. Automatizar desde el código hasta el deployment (true DevOps/MLOps)
+            <br>
+            5. Documentar profesionalmente para sostenibilidad a largo plazo
+            <br><br>
+            <b style="color: #0f172a;">No es solo un proyecto de Machine Learning—es una solución empresarial completa que podría ponerse en producción hoy.</b>
         </p>
         """, unsafe_allow_html=True)
         
-        m1, m2, m3 = st.columns(3)
-        with m1:
-            st.markdown('<div class="metric-box"><span class="metric-value">0%</span><span class="metric-label">Human Loop</span></div>', unsafe_allow_html=True)
-        with m2:
-            st.markdown('<div class="metric-box"><span class="metric-value">95%</span><span class="metric-label">Accuracy CNN</span></div>', unsafe_allow_html=True)
-        with m3:
-            st.markdown('<div class="metric-box"><span class="metric-value">Hourly</span><span class="metric-label">ETL Schedule</span></div>', unsafe_allow_html=True)
+        st.markdown('<div class="metric-box"><span class="metric-value">Stack tecnológico usado</span><span class="metric-label">Software</span></div>', unsafe_allow_html=True)
             
         st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown(render_techs(["Apache Airflow", "TensorFlow CNN", "Tesseract OCR", "Docker", "AWS S3", "Google Drive API"]), unsafe_allow_html=True)
+        st.markdown(render_techs(["Python", "FastAPI", "TensorFlow", "Apache Airflow", "Docker", "Terraform", "MySQL", "Pytesseract","MLflow","DVC","Google Drive API","Git","AWS Services"]), unsafe_allow_html=True)
         
         st.markdown("<br>", unsafe_allow_html=True)
         
