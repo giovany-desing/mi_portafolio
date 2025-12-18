@@ -656,7 +656,7 @@ with c1:
     st.markdown('<h1 class="hero-title">Ingeniería de ML.<br><span class="gradient-text">Nivel Producción.</span></h1>', unsafe_allow_html=True)
     st.markdown("""
     <div class="hero-subtitle">
-        Soy enfocado en transformar incertidumbre técnica en activos empresariales rentables. No solo despliego modelos; diseño ecosistemas de <b>'Auto-recuperación'</b> y arquitecturas Cloud autónomas que eliminan la deuda técnica y reducen costos operativos. Mi propuesta de valor es clara: construyo sistemas de inteligencia artificial que <b>funcionan solos, reducen costos operativos, automatizan procesos y escalan automáticamente</b>.
+        Soy enfocado en transformar incertidumbre técnica en activos empresariales rentables. No solo despliego modelos, diseño ecosistemas de <b>'Auto-recuperación'</b> y arquitecturas Cloud autónomas que eliminan la deuda técnica y reducen costos operativos. Mi propuesta de valor es clara: construyo sistemas de inteligencia artificial que <b>funcionan solos, reducen costos operativos, automatizan procesos y escalan automáticamente</b>.
     </div>
     """, unsafe_allow_html=True)
     
