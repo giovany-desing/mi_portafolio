@@ -86,10 +86,10 @@ def load_mlops_image():
     except:
         return None
 
-def load_dinero_image():
-    """Carga la imagen de dinero/ROI"""
+def load_robot_image():
+    """Carga la imagen de robot/ROI"""
     try:
-        img_path = "image_dinero.jpg"
+        img_path = "image_robot.jpg"
         if os.path.exists(img_path):
             return Image.open(img_path)
         return None
@@ -114,7 +114,7 @@ invoice_image = load_invoice_image()
 tickets_image = load_tickets_image()
 arquitectura_image = load_arquitectura_image()
 mlops_image = load_mlops_image()
-dinero_image = load_dinero_image()
+robot_image = load_robot_image()
 icfes_image = load_icfes_image()
 
 # ==============================================================================
@@ -652,14 +652,11 @@ c1, c2 = st.columns([2.2, 0.8])
 
 with c1:
     st.markdown('<div class="hero-container">', unsafe_allow_html=True)
-    st.markdown('<div class="status-badge">SENIOR ML ENGINEER & AI ARCHITECT</div>', unsafe_allow_html=True)
+
     st.markdown('<h1 class="hero-title">Ingeniería de ML.<br><span class="gradient-text">Nivel Producción.</span></h1>', unsafe_allow_html=True)
     st.markdown("""
     <div class="hero-subtitle">
-        Construyo sistemas inteligentes que resuelven problemas de negocio reales. 
-        Desde arquitecturas <b>Multi-Agente con GenAI</b> hasta pipelines de <b>MLOps</b> que se auto-reparan.
-        <br>
-        No busco "probar modelos". <b>Entrego soluciones escalables, seguras y rentables.</b>
+        Soy enfocado en transformar incertidumbre técnica en activos empresariales rentables. No solo despliego modelos; diseño ecosistemas de <b>'Auto-recuperación'</b> y arquitecturas Cloud autónomas que eliminan la deuda técnica y reducen costos operativos. Mi propuesta de valor es clara: construyo sistemas de inteligencia artificial que <b>funcionan solos, reducen costos operativos, automatizan procesos y escalan automáticamente</b>.
     </div>
     """, unsafe_allow_html=True)
     
@@ -721,11 +718,11 @@ def value_card(icon, title, desc, image=None):
     """, unsafe_allow_html=True)
 
 with col_v1:
-    value_card("🏗️", "Arquitectura Robusta", "No entrego scripts sueltos. Entrego sistemas con **IaC (Terraform)**, Contenedores Dockerizados y orquestación resiliente.", arquitectura_image)
+    value_card("🏗️", "Arquitectura \"Cost-First\" (FinOps)", "Tengo la capacidad técnica para alinear la infraestructura Cloud con el estado de resultados de la empresa. Optimizo cada línea de código y recurso en la nube para maximizar el margen de beneficio, logrando que mis soluciones no sean un gasto, sino una inversión autosostenible con un ROI medible en semanas.", arquitectura_image)
 with col_v2:
-    value_card("🔄", "MLOps Nativo", "El modelo es solo el 10%. Implemento **DVC, Airflow y Detección de Drift** para garantizar que el sistema no se degrade en producción.", mlops_image)
+    value_card("🔄", "MLOps \"Zero-Touch\" & Autonomía Operativa", "Mientras otros ingenieros entregan modelos que requieren mantenimiento constante, yo implemento arquitecturas de auto-reparación (drift detection y re-entrenamiento automático). Mis sistemas detectan cuando la data cambia y se adaptan sin intervención humana, garantizando continuidad de negocio 24/7 y liberando al equipo de soporte.", mlops_image)
 with col_v3:
-    value_card("💰", "Enfoque en ROI", "Cada línea de código está justificada por un impacto en el negocio: reducción de costos, automatización de horas-hombre o mejora en la toma de decisiones.", dinero_image)
+    value_card("💰", "Despliego IA generativa en producción", "Supero las implementaciones estándar de LLMs creando sistemas de Inteligencia Híbrida (RAG + LangGraph). Construyo agentes capaces de razonar, corregirse a sí mismos (Self-Correction) y ejecutar acciones complejas sobre bases de datos corporativas con seguridad bancaria, llevando la IA de un \"chat curioso\" a una herramienta de ejecución operativa.", robot_image)
 
 # ==============================================================================
 # 6. ARQUITECTURAS DESPLEGADAS (LOS PROYECTOS)
@@ -949,7 +946,7 @@ with st.container():
             
             st.markdown(f"""
             <div style="border-radius: 12px; height: 100%; min-height: 210px; border: 1px solid rgba(0,0,0,0.08); overflow: hidden; background: #ffffff; display: flex; align-items: center; justify-content: center;">
-                <img src="data:image/png;base64,{img_str}" alt="Chatbot Architecture" style="width: 70%; height: 70%; object-fit: cover; display: block; border-radius: 8px;">
+                <img src="data:image/png;base64,{img_str}" alt="Chatbot Architecture" style="width: 113%; height: 113%; object-fit: cover; display: block; border-radius: 8px;">
             </div>
             """, unsafe_allow_html=True)
         else:
@@ -964,32 +961,29 @@ with st.container():
             """, unsafe_allow_html=True)
     
     with c_txt:
-        st.markdown('<div class="status-badge">GEN AI • CLOUD • MULTI-AGENT</div>', unsafe_allow_html=True)
-        st.markdown('<h2>Chatbot Analítico Empresarial con RAG & SQL</h2>', unsafe_allow_html=True)
+        st.markdown('<div class="status-badge">PROYECTO PARA USO EMPRESARIAL ‖ NIVEL AVANZADO</div>', unsafe_allow_html=True)
+        st.markdown('<h2>Chatbot Analítico Empresarial</h2>', unsafe_allow_html=True)
         st.markdown("""
         <p style="color: #475569; font-size: 1.1rem; line-height: 1.6;">
-            Solución al problema de <b style="color: #0f172a;">"Datos Atrapados"</b>. Transformé bases de datos SQL complejas en una conversación natural. 
-            Utilizando una arquitectura de <b style="color: #0f172a;">3 capas de inteligencia</b> (Reglas → Modelo Fine-Tuned → LLM General), 
-            este sistema democratiza el acceso a la información sin depender de analistas.
+            Desarrollé un <b style="color: #0f172a;">sistema de BI conversacional</b> que elimina la barrera técnica entre usuarios de negocio y sus datos. El problema: analistas y gerentes dependen de equipos técnicos para consultas SQL básicas, con tiempos de respuesta de días. Mi solución: un chatbot que transforma preguntas en español natural a SQL optimizado, visualizaciones profesionales y KPIs calculados, <b style="color: #0f172a;">todo en menos de 2 segundos.</b>
+            <br><br>
+            La arquitectura implementa un <b style="color: #0f172a;">pipeline de inteligencia en 3 capas</b> (reglas determinísticas → modelo GPT fine-tuned → Llama 3.3 70B) que optimiza costo-precisión automáticamente. El núcleo es un <b style="color: #0f172a;">grafo de estados con LangGraph</b> que orquesta flujos adaptativos con <b style="color: #0f172a;">RAG semántico</b> sobre pgvector para few-shot learning. Implementé self-correction automática mediante análisis de errores SQL, logrando <b style="color: #0f172a;">96% de accuracy</b> en generación de queries.
+            <br><br>
+            Infraestructura full IaC con Terraform en AWS (VPC, RDS, EC2, S3), <b style="color: #0f172a;">CI/CD completo</b>, y un <b style="color: #0f172a;">feedback loop cerrado</b> que triggerea reentrenamiento automático cuando las métricas caen bajo umbral. Performance tracker con observabilidad granular: percentiles P50/P95/P99, error classification, y métricas de confianza del modelo.
+            <br><br>
+            <b style="color: #0f172a;">Resultados:</b> ~$38/mes para 10k queries, 1.2s latencia media, 45% cache hit rate, deployed con auto-scaling y disaster recovery.
         </p>
         """, unsafe_allow_html=True)
         
-        # Métricas de impacto
-        m1, m2, m3 = st.columns(3)
-        with m1:
-            st.markdown('<div class="metric-box"><span class="metric-value">< 2s</span><span class="metric-label">Latencia</span></div>', unsafe_allow_html=True)
-        with m2:
-            st.markdown('<div class="metric-box"><span class="metric-value">99.9%</span><span class="metric-label">IaC Terraform</span></div>', unsafe_allow_html=True)
-        with m3:
-            st.markdown('<div class="metric-box"><span class="metric-value">100%</span><span class="metric-label">Auto-Scalable</span></div>', unsafe_allow_html=True)
+        st.markdown('<div class="metric-box"><span class="metric-value">Stack tecnológico usado</span><span class="metric-label">Software</span></div>', unsafe_allow_html=True)
         
         st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown(render_techs(["LangGraph", "Llama 3.1 Fine-tuned", "AWS RDS/EC2", "Terraform", "PostgreSQL Vector", "Redis"]), unsafe_allow_html=True)
+        st.markdown(render_techs(["FastAPI", "LangChain", "LangGraph", "Llama 3.1 8B (Fine-tuned)","GPT-3.5 (Fine-tuned)", "sentence-transformers", "PostgreSQL + pgvector", "MySQL (AWS RDS)", "Plotly", "Pandas", "NumPy", "EC2 (t3.micro)", "AWS","S3", "CloudWatch", "Docker", "Docker Compose", "Terraform", "GitHub Actions", "pytest"]), unsafe_allow_html=True)
         
         st.markdown("<br>", unsafe_allow_html=True)
         
         # Botón Ver Ingenieria
-        st.link_button("Ver Ingenieria", "LINK_PROYECTO_CHATBOT", use_container_width=False)
+        st.link_button("Ver Ingenieria", "https://chatbotapp-tqbqjw97ruumscgjf5km49.streamlit.app/", use_container_width=False)
 
     st.markdown('</div>', unsafe_allow_html=True)
 
@@ -1007,8 +1001,3 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-st.markdown("""
-<div style="text-align: center; margin-top: 2rem; color: #94a3b8; font-size: 0.8rem;">
-    ENGINEERED BY EDGAR YOVANY | 2024
-</div>
-""", unsafe_allow_html=True)
