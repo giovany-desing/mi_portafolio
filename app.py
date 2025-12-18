@@ -906,7 +906,7 @@ with st.container():
         st.markdown("<br>", unsafe_allow_html=True)
         
         # Botón Ver Ingenieria
-        st.link_button("Ver Ingenieria", "LINK_PROYECTO_FACTURAS", use_container_width=False)
+        st.link_button("Ver Ingenieria", "https://clasificador-facturas-app-exkjbpacjtyensqtkxhtmo.streamlit.app/", use_container_width=False)
 
     with c_img:
         if invoice_image:
