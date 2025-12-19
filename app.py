@@ -860,7 +860,7 @@ with st.container():
     c_txt, c_img = st.columns([1.5, 1], gap="large") # Invertimos orden para dinamismo
     
     with c_txt:
-        st.markdown('<div class="status-badge">PROYECTO PARA USO EMPRESARIAL ‖ NIVEL AVANZADO</div>', unsafe_allow_html=True)
+        st.markdown('<div class="status-badge">PROYECTO PARA USO EMPRESARIAL ‖ NIVEL AVANZADO PLUS</div>', unsafe_allow_html=True)
         st.markdown('<h2>Sistema ETL de Facturas con Machine Learning</h2>', unsafe_allow_html=True)
         st.markdown("""
         <p style="color: #475569; font-size: 1.1rem; line-height: 1.6;">
