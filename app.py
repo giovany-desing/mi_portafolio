@@ -682,6 +682,38 @@ with c2:
         if lottie_hero:
             st_lottie(lottie_hero, height=400, key="hero")
     st.markdown('</div>', unsafe_allow_html=True)
+    
+    # Botones de redes sociales
+    st.markdown("""
+    <div style="display: flex; flex-direction: row; gap: 0.8rem; margin-top: 1.5rem; align-items: center; justify-content: center;">
+        <a href="https://www.linkedin.com/in/edgar-yovany-samaca-acu%C3%B1a-a17452210/" target="_blank" style="text-decoration: none; flex: 1; max-width: 120px;">
+            <button style="background: #0f172a; color: white !important; border: none; padding: 0.9rem 1.5rem; font-weight: 700; border-radius: 16px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); width: 100%; text-transform: none; letter-spacing: 0.03em; font-size: 0.95rem; position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.35), 0 5px 15px rgba(15, 23, 42, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1); cursor: pointer; font-family: 'Inter', sans-serif;">
+                LinkedIn
+            </button>
+        </a>
+        <a href="https://github.com/giovany-desing" target="_blank" style="text-decoration: none; flex: 1; max-width: 120px;">
+            <button style="background: #0f172a; color: white !important; border: none; padding: 0.9rem 1.5rem; font-weight: 700; border-radius: 16px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); width: 100%; text-transform: none; letter-spacing: 0.03em; font-size: 0.95rem; position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.35), 0 5px 15px rgba(15, 23, 42, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1); cursor: pointer; font-family: 'Inter', sans-serif;">
+                GitHub
+            </button>
+        </a>
+    </div>
+    <style>
+        a[href*="linkedin"] button:hover,
+        a[href*="github"] button:hover {
+            border: none;
+            box-shadow: 0 15px 40px rgba(15, 23, 42, 0.5), 0 10px 25px rgba(15, 23, 42, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px) scale(1.02);
+            color: white !important;
+            background: #1e293b;
+        }
+        a[href*="linkedin"] button:active,
+        a[href*="github"] button:active {
+            transform: translateY(-2px) scale(0.98);
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.4), 0 4px 10px rgba(15, 23, 42, 0.3);
+            background: #0f172a;
+        }
+    </style>
+    """, unsafe_allow_html=True)
 
 # ==============================================================================
 # 5. FILOSOFÍA DE INGENIERÍA (WHY ME?)
@@ -836,7 +868,7 @@ with st.container():
             <br><br>
             Implementé <b style="color: #0f172a;">FastAPI</b> por su arquitectura asíncrona ASGI (30 req/min, &lt;500ms latencia), validación Pydantic automática, y <b style="color: #0f172a;">hot-reload de modelos sin downtime</b> — crítico para actualizar en producción sin afectar SLAs. Desplegué <b style="color: #0f172a;">Apache Airflow</b> para orquestación on-premise con DAGs visuales, retry logic granular, y ShortCircuitOperators que previenen reentrenamientos innecesarios, reduciendo costos computacionales 60%.
             <br><br>
-            Optimicé entrenamiento comparando Gradient Boosting vs XGBoost vs LightGBM, seleccionando objetivamente el mejor. Versioné con DVC + S3 (datasets y modelos), trackeé experimentos con MLflow (params, metrics, artifacts). Construí drift detection tri-dimensional (KS-test, Chi-square, vocabulary growth) que detecta degradación en &lt;6 horas y dispara auto-retrain solo si mejora ≥1%.
+            Optimicé entrenamiento comparando Gradient Boosting vs XGBoost vs LightGBM, seleccionando objetivamente el mejor. Versioné con DVC + S3 (datasets y modelos), Hice tracking de experimentos con MLflow (params, metrics, artifacts). Construí drift detection tri-dimensional (KS-test, Chi-square, vocabulary growth) que detecta degradación en &lt;6 horas y dispara auto-retrain solo si mejora ≥1%.
             <br><br>
             Desplegué dual orchestration (GitHub Actions cloud + Airflow on-premise) para máxima flexibilidad. Implementé procesamiento batch (100 tickets simultáneos via vectorización NumPy), reduciendo migraciones 97% (5,000 tickets en 5 min vs 3h). El sistema se <b style="color: #0f172a;">auto-mantiene</b>: detecta drift de vocabulario ("Teams", "Zoom" nuevos) → retrain con datos actualizados → valida mejora → hot-reload API → notifica — <b style="color: #0f172a;">cero intervención humana</b>.
         </p>
