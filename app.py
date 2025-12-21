@@ -656,7 +656,7 @@ with c1:
     st.markdown('<h1 class="hero-title">Ingeniería de ML.<br><span class="gradient-text">Nivel Producción.</span></h1>', unsafe_allow_html=True)
     st.markdown("""
     <div class="hero-subtitle">
-        Soy enfocado en transformar incertidumbre técnica en activos empresariales rentables. No solo despliego modelos, diseño ecosistemas de <b>'Auto-recuperación'</b> y arquitecturas Cloud autónomas que eliminan la deuda técnica y reducen costos operativos. Mi propuesta de valor es clara: construyo sistemas de inteligencia artificial que <b>funcionan solos, reducen costos operativos, automatizan procesos y escalan automáticamente</b>.
+        Estoy enfocado en transformar incertidumbre técnica en activos empresariales rentables. No solo despliego modelos, diseño ecosistemas de <b>'Auto-recuperación'</b> y arquitecturas Cloud autónomas que eliminan la deuda técnica y reducen costos operativos. Mi propuesta de valor es clara: construyo sistemas de inteligencia artificial que <b>funcionan solos, reducen costos operativos, automatizan procesos y escalan automáticamente</b>.
     </div>
     """, unsafe_allow_html=True)
     
@@ -682,38 +682,6 @@ with c2:
         if lottie_hero:
             st_lottie(lottie_hero, height=400, key="hero")
     st.markdown('</div>', unsafe_allow_html=True)
-    
-    # Botones de redes sociales
-    st.markdown("""
-    <div style="display: flex; flex-direction: row; gap: 0.8rem; margin-top: 1.5rem; align-items: center; justify-content: center;">
-        <a href="https://www.linkedin.com/in/edgar-yovany-samaca-acu%C3%B1a-a17452210/" target="_blank" style="text-decoration: none; flex: 1; max-width: 120px;">
-            <button style="background: #0f172a; color: white !important; border: none; padding: 0.9rem 1.5rem; font-weight: 700; border-radius: 16px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); width: 100%; text-transform: none; letter-spacing: 0.03em; font-size: 0.95rem; position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.35), 0 5px 15px rgba(15, 23, 42, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1); cursor: pointer; font-family: 'Inter', sans-serif;">
-                LinkedIn
-            </button>
-        </a>
-        <a href="https://github.com/giovany-desing" target="_blank" style="text-decoration: none; flex: 1; max-width: 120px;">
-            <button style="background: #0f172a; color: white !important; border: none; padding: 0.9rem 1.5rem; font-weight: 700; border-radius: 16px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); width: 100%; text-transform: none; letter-spacing: 0.03em; font-size: 0.95rem; position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.35), 0 5px 15px rgba(15, 23, 42, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1); cursor: pointer; font-family: 'Inter', sans-serif;">
-                GitHub
-            </button>
-        </a>
-    </div>
-    <style>
-        a[href*="linkedin"] button:hover,
-        a[href*="github"] button:hover {
-            border: none;
-            box-shadow: 0 15px 40px rgba(15, 23, 42, 0.5), 0 10px 25px rgba(15, 23, 42, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            transform: translateY(-5px) scale(1.02);
-            color: white !important;
-            background: #1e293b;
-        }
-        a[href*="linkedin"] button:active,
-        a[href*="github"] button:active {
-            transform: translateY(-2px) scale(0.98);
-            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.4), 0 4px 10px rgba(15, 23, 42, 0.3);
-            background: #0f172a;
-        }
-    </style>
-    """, unsafe_allow_html=True)
 
 # ==============================================================================
 # 5. FILOSOFÍA DE INGENIERÍA (WHY ME?)
@@ -1029,6 +997,16 @@ st.markdown("""
     <p style="color: #475569; font-size: 1.2rem; margin-bottom: 1.5rem;">
         Disponible para liderar iniciativas de IA que requieran arquitectura sólida y visión de negocio.
     </p>
+    <div style="display: flex; flex-direction: column; gap: 0.8rem; align-items: center; margin-top: 2rem;">
+        <div style="display: flex; align-items: center; gap: 0.5rem; color: #475569; font-size: 1rem; font-family: 'Inter', sans-serif;">
+            <span style="font-size: 1.2rem;">📞</span>
+            <span>+57 301 695 3459</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem; color: #475569; font-size: 1rem; font-family: 'Inter', sans-serif;">
+            <span style="font-size: 1.2rem;">✉️</span>
+            <span>egsamaca56@gmail.com</span>
+        </div>
+    </div>
 </div>
 """, unsafe_allow_html=True)
 
