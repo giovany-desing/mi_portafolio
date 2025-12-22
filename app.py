@@ -682,6 +682,44 @@ with c2:
         if lottie_hero:
             st_lottie(lottie_hero, height=400, key="hero")
     st.markdown('</div>', unsafe_allow_html=True)
+    
+    # Nombre debajo de la foto
+    st.markdown("""
+    <div style="text-align: center; margin-top: 1.5rem;">
+        <h3 style="color: #0f172a; font-size: 1.3rem; font-weight: 700; font-family: 'Inter', sans-serif; margin: 0; letter-spacing: -0.02em;">
+            Edgar Yovany Samacá Acuña
+        </h3>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Botones de redes sociales
+    st.markdown("""
+    <div style="display: flex; flex-direction: row; gap: 0.8rem; margin-top: 1.2rem; align-items: center; justify-content: center;">
+        <a href="https://www.linkedin.com/in/edgar-yovany-samaca-acu%C3%B1a-a17452210/" target="_blank" style="text-decoration: none; flex: 1; max-width: 120px;">
+            <button style="background: #0f172a; color: white !important; border: none; padding: 0.8rem 1.2rem; font-weight: 600; border-radius: 12px; transition: all 0.3s ease; width: 100%; text-transform: none; letter-spacing: 0.02em; font-size: 0.9rem; cursor: pointer; font-family: 'Inter', sans-serif; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);">
+                LinkedIn
+            </button>
+        </a>
+        <a href="https://github.com/giovany-desing" target="_blank" style="text-decoration: none; flex: 1; max-width: 120px;">
+            <button style="background: #0f172a; color: white !important; border: none; padding: 0.8rem 1.2rem; font-weight: 600; border-radius: 12px; transition: all 0.3s ease; width: 100%; text-transform: none; letter-spacing: 0.02em; font-size: 0.9rem; cursor: pointer; font-family: 'Inter', sans-serif; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);">
+                GitHub
+            </button>
+        </a>
+    </div>
+    <style>
+        a[href*="linkedin"] button:hover,
+        a[href*="github"] button:hover {
+            background: #1e293b !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(15, 23, 42, 0.3);
+        }
+        a[href*="linkedin"] button:active,
+        a[href*="github"] button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.2);
+        }
+    </style>
+    """, unsafe_allow_html=True)
 
 # ==============================================================================
 # 5. FILOSOFÍA DE INGENIERÍA (WHY ME?)
